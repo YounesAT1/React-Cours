@@ -1,0 +1,27 @@
+.asideContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  column-gap: 20px;
+  width: 25%;
+}
+
+.asidItem {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.profile {
+  border-radius: 50%;
+}
+
+.asidItem p {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.leftIcons {
+  font-size: 1.5rem;
+  color: steelblue;
+}

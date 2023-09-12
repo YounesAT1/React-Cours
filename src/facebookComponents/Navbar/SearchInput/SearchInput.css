@@ -1,0 +1,30 @@
+/* SearchInput.css */
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+
+input[type="text"] {
+  padding: 16px;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  outline: none;
+  padding-left: 40px;
+  width: 225px;
+  background: whitesmoke;
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: larger;
+  color: gray;
+}
+
+input[type="text"]::placeholder {
+  color: #999;
+  font-size: 16px;
+}

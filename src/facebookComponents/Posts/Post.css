@@ -1,0 +1,55 @@
+.post-main {
+  width: 100%;
+  background-color: white;
+  height: 150px;
+  border-radius: 8px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.upperpart {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 10px 10px;
+}
+#inputPosts {
+  padding: 16px;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  outline: none;
+  padding-left: 40px;
+  width: 225px;
+  background: whitesmoke;
+  width: inherit;
+}
+.upperpart img {
+  background-color: rgb(207, 207, 207);
+  object-fit: contain;
+  padding: 5px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.shareOptions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1.3rem;
+}
+
+.option p {
+  color: rgb(158, 158, 158);
+  margin-left: 5px;
+  font-size: 16px;
+}

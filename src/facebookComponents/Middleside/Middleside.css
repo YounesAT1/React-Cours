@@ -1,0 +1,41 @@
+.add-to-story {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  margin-top: 30px;
+  gap: 5px;
+}
+
+.Upper-part {
+  width: 120px;
+  height: 200px;
+  border: 1px solid #eee;
+  background: rgb(224, 224, 224);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid navy;
+}
+
+.Upper-part img {
+  object-fit: cover;
+  width: inherit;
+  height: 145px;
+}
+
+.fa-plus {
+  color: white;
+  font-size: xx-large;
+  border-radius: 50%;
+  padding: 5px;
+  background: rgb(53, 53, 172);
+}
+
+.Upper-part p {
+  width: 99%;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}

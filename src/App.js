@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ExTwo from "./usestateExamples/ExTwo";
+// import ExOne from "./usestateExamples/ExOne";
+// import Student from "./ClassComponent/Student";
+// import ClassComponent from "./ClassComponent/ClassComponent.jsx";
+// import Leftside from "./facebookComponents/Leftside/Leftside";
+// import Middleside from "./facebookComponents/Middleside/Middleside";
+// import Navbar from "./facebookComponents/Navbar/Navbar";
+// import Rightside from "./facebookComponents/Rightside/Rightside";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ExTwo />
+      {/* <ExOne /> */}
+      {/* <Student /> */}
+      {/* <ClassComponent /> */}
+      {/* <Navbar />
+      <div className="main">
+        <Leftside />
+        <Middleside />
+        <Rightside />
+      </div> */}
     </div>
   );
-}
+};
 
 export default App;
