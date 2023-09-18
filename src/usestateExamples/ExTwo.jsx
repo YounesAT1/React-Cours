@@ -21,52 +21,6 @@ const ExTwo = () => {
     setLastName("");
   };
 
-  const styles = {
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      maxWidth: "300px",
-      margin: "0 auto",
-    },
-    label: {
-      marginBottom: "5px",
-    },
-    input: {
-      padding: "5px",
-      marginBottom: "10px",
-      border: "1px solid #ccc",
-      borderRadius: "4px",
-    },
-    button: {
-      padding: "10px 20px",
-      backgroundColor: "#007bff",
-      color: "#fff",
-      border: "none",
-      borderRadius: "4px",
-      cursor: "pointer",
-    },
-    buttonHover: {
-      backgroundColor: "#0056b3",
-    },
-    table: {
-      width: "100%",
-      borderCollapse: "collapse",
-      marginTop: "20px",
-    },
-    tableHeader: {
-      backgroundColor: "#f2f2f2",
-    },
-    tableRow: {
-      padding: "10px",
-      textAlign: "center",
-      borderBottom: "1px solid #ddd",
-      fontSize: "1.2rem",
-    },
-    evenTableRow: {
-      backgroundColor: "#f2f2f2",
-    },
-  };
-
   return (
     <div>
       <form
@@ -108,11 +62,8 @@ const ExTwo = () => {
           </tr>
         </thead>
         <tbody>
-          {people.map((person, index) => (
-            <tr
-              key={index}
-              style={index % 2 === 0 ? styles.evenTableRow : null}
-            >
+          {people.map((person) => (
+            <tr style={styles.evenTableRow}>
               <td style={styles.tableRow}>{person.firstName}</td>
               <td style={styles.tableRow}>{person.lastName}</td>
             </tr>
@@ -122,5 +73,49 @@ const ExTwo = () => {
     </div>
   );
 };
-
+const styles = {
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "300px",
+    margin: "0 auto",
+  },
+  label: {
+    marginBottom: "5px",
+  },
+  input: {
+    padding: "5px",
+    marginBottom: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+  },
+  button: {
+    padding: "10px 20px",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  buttonHover: {
+    backgroundColor: "#0056b3",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    marginTop: "20px",
+  },
+  tableHeader: {
+    backgroundColor: "#f2f2f2",
+  },
+  tableRow: {
+    padding: "10px",
+    textAlign: "center",
+    borderBottom: "1px solid #ddd",
+    fontSize: "1.2rem",
+  },
+  evenTableRow: {
+    backgroundColor: "#f2f2f2",
+  },
+};
 export default ExTwo;

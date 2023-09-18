@@ -1,5 +1,8 @@
 import "./App.css";
-import ExTwo from "./usestateExamples/ExTwo";
+// import ExThree from "./ClassComponent/ExThree";
+import ExClassTwo from "./ClassComponent/ExClassTwo";
+// import ExClass from "./ClassComponent/ExClass";
+// import ExTwo from "./usestateExamples/ExTwo";
 // import ExOne from "./usestateExamples/ExOne";
 // import Student from "./ClassComponent/Student";
 // import ClassComponent from "./ClassComponent/ClassComponent.jsx";
@@ -11,7 +14,10 @@ import ExTwo from "./usestateExamples/ExTwo";
 const App = () => {
   return (
     <div>
-      <ExTwo />
+      {/* <ExThree /> */}
+      <ExClassTwo />
+      {/* <ExClass /> */}
+      {/* <ExTwo /> */}
       {/* <ExOne /> */}
       {/* <Student /> */}
       {/* <ClassComponent /> */}
