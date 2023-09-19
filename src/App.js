@@ -1,4 +1,5 @@
 import "./App.css";
+import ImageQuiz from "./ClassComponent/ImageQuiz";
 // import PillFass from "./ClassComponent/PillFass";
 // import RandomNumber from "./ClassComponent/RandomNumber";
 // import ExThree from "./ClassComponent/ExThree";
@@ -15,7 +16,14 @@ import "./App.css";
 
 const App = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <ImageQuiz />
       {/* <PillFass /> */}
       {/* <ExThree /> */}
       {/* <ExClassTwo /> */}
