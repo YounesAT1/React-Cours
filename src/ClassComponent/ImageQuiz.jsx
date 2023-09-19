@@ -28,7 +28,8 @@ class ImageQuiz extends React.Component {
   handleAnswerClicking = (selectedAnswer) => () => {
     const currentQuestion =
       this.state.questions[this.state.currentQuestionIndex];
-    const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+    const isCorrect =
+      selectedAnswer === currentQuestion.correctAnswer ? true : false;
     this.setState({
       answerClicked: true,
       score: isCorrect ? this.state.score + 1 : this.state.score,
@@ -64,6 +65,7 @@ class ImageQuiz extends React.Component {
   render() {
     const currentQuestion =
       this.state.questions[this.state.currentQuestionIndex];
+
     return (
       <div className="image-quiz-container">
         <h5 className="score">Score: {this.state.score}</h5>
@@ -77,6 +79,7 @@ class ImageQuiz extends React.Component {
             >
               {currentQuestion.correctAnswer}
             </button>
+
             <button
               className="answer-button"
               onClick={this.handleAnswerClicking(currentQuestion.wrongAnswer)}
@@ -91,6 +94,7 @@ class ImageQuiz extends React.Component {
             <h5 className={this.state.isCorrect ? "correct" : "wrong"}>
               {this.state.isCorrect ? "Correct!" : "Wrong!"}
             </h5>
+
             {this.state.alert && (
               <div>
                 <h5 className="alert">{this.state.alert}</h5>
