@@ -42,3 +42,11 @@
   display: flex;
   justify-content: space-between;
 } */
+#red {
+  background: red;
+  color: white;
+}
+#green {
+  background: green;
+  color: white;
+}

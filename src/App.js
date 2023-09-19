@@ -1,6 +1,8 @@
 import "./App.css";
+// import PillFass from "./ClassComponent/PillFass";
+// import RandomNumber from "./ClassComponent/RandomNumber";
 // import ExThree from "./ClassComponent/ExThree";
-import ExClassTwo from "./ClassComponent/ExClassTwo";
+// import ExClassTwo from "./ClassComponent/ExClassTwo";
 // import ExClass from "./ClassComponent/ExClass";
 // import ExTwo from "./usestateExamples/ExTwo";
 // import ExOne from "./usestateExamples/ExOne";
@@ -14,8 +16,9 @@ import ExClassTwo from "./ClassComponent/ExClassTwo";
 const App = () => {
   return (
     <div>
+      {/* <PillFass /> */}
       {/* <ExThree /> */}
-      <ExClassTwo />
+      {/* <ExClassTwo /> */}
       {/* <ExClass /> */}
       {/* <ExTwo /> */}
       {/* <ExOne /> */}

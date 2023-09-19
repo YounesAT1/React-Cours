@@ -10,7 +10,6 @@ class ExClassTwo extends React.Component {
         group: "",
         mark: "",
         module: "",
-        averagMarks: "",
       },
       students: [],
       moduleData: [],
