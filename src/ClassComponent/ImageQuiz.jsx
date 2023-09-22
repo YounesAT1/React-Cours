@@ -14,14 +14,16 @@ class ImageQuiz extends React.Component {
         { pic: "cat.jpg", correctAnswer: "Cat", wrongAnswer: "Fox" },
         {
           pic: "dog.jpg",
-          correctAnswer: "Dog",
-          wrongAnswer: "Your friend",
+          correctAnswer: "Your friend",
+          wrongAnswer: "Dog",
         },
       ],
-      answerClicked: false,
+      isClicked: false,
       currentQuestionIndex: 0,
       score: 0,
       alert: "",
+      selectedAnswer: "",
+      isCorrect: false,
     };
   }
 
@@ -31,10 +33,10 @@ class ImageQuiz extends React.Component {
     const isCorrect =
       selectedAnswer === currentQuestion.correctAnswer ? true : false;
     this.setState({
-      answerClicked: true,
+      isClicked: true,
       score: isCorrect ? this.state.score + 1 : this.state.score,
-      selectedAnswer,
-      isCorrect,
+      selectedAnswer: selectedAnswer,
+      isCorrect: isCorrect,
     });
     setTimeout(this.moveToNextQuestion, 1000);
   };
@@ -44,7 +46,7 @@ class ImageQuiz extends React.Component {
     if (nextQuestionIndex < this.state.questions.length) {
       this.setState({
         currentQuestionIndex: nextQuestionIndex,
-        answerClicked: false,
+        isClicked: false,
       });
     } else {
       this.setState({
@@ -55,10 +57,12 @@ class ImageQuiz extends React.Component {
 
   restartGame = () => {
     this.setState({
-      answerClicked: false,
+      isClicked: false,
       currentQuestionIndex: 0,
       score: 0,
       alert: "",
+      selectedAnswer: "",
+      isCorrect: false,
     });
   };
 
@@ -71,7 +75,7 @@ class ImageQuiz extends React.Component {
         <h5 className="score">Score: {this.state.score}</h5>
         <img src={currentQuestion.pic} alt="Question" className="quiz-image" />
 
-        {!this.state.answerClicked && (
+        {!this.state.isClicked && (
           <div className="answer-buttons">
             <button
               className="answer-button"
@@ -89,7 +93,7 @@ class ImageQuiz extends React.Component {
           </div>
         )}
 
-        {this.state.answerClicked && (
+        {this.state.isClicked && (
           <div className="answer-feedback">
             <h5 className={this.state.isCorrect ? "correct" : "wrong"}>
               {this.state.isCorrect ? "Correct!" : "Wrong!"}
