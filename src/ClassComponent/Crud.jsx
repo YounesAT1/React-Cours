@@ -257,6 +257,9 @@ class Crud extends Component {
           </table>
         )}
         <div>
+          {this.state.alert && (
+            <p style={{ color: "red" }}>{this.state.alert}</p>
+          )}
           <h2>Your Total is : {parseFloat(this.state.total)}</h2>
         </div>
       </>

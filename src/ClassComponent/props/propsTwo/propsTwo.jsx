@@ -1,8 +1,21 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
-class propsTwo extends Component {
+class DisplayComponent extends Component {
   render() {
-    return <div></div>;
+    const { selectedWords } = this.props;
+
+    return (
+      <div>
+        <h2>Selected Words</h2>
+        <ul>
+          {selectedWords.map((word, index) => (
+            <li key={index}>{word}</li>
+          ))}
+        </ul>
+        {selectedWords.length === 0 && <p>No words selected</p>}
+      </div>
+    );
   }
 }
-export default propsTwo;
+
+export default DisplayComponent;

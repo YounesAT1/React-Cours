@@ -1,6 +1,7 @@
-// import React, { Component } from "react";
+/* eslint-disable no-lone-blocks */
+import React, { Component } from "react";
 // import PropsOne from "./ClassComponent/props/propsOne/PropsOne";
-// import PropsTwo from "./ClassComponent/props/propsTwo/propsTwo";
+import PropsTwo from "./ClassComponent/props/propsTwo/propsTwo";
 import "./App.css";
 // import PlayersClass from "./ClassComponent/PlayersClass";
 // import ImageQuiz from "./ClassComponent/ImageQuiz";
@@ -18,62 +19,101 @@ import "./App.css";
 // import Navbar from "./facebookComponents/Navbar/Navbar";
 // import Rightside from "./facebookComponents/Rightside/Rightside";
 
-import Crud from "./ClassComponent/Crud";
+// import Crud from "./ClassComponent/Crud";
 
-const App = () => {
-  return (
-    <div>
-      <Crud />
-      {/* previouseComponents */}
+// const App = () => {
+//   return (
+//     <div>
+{
+  /* <Crud /> */
+}
+{
+  /* previouseComponents */
+}
 
-      {/* <input type="text" /> */}
-      {/* <PlayersClass /> */}
-      {/* <ImageQuiz /> */}
-      {/* <PillFass /> */}
-      {/* <ExThree /> */}
-      {/* <ExClassTwo /> */}
-      {/* <ExClass /> */}
-      {/* <ExTwo /> */}
-      {/* <ExOne /> */}
-      {/* <Student /> */}
-      {/* <ClassComponent /> */}
-      {/* <Navbar />
+{
+  /* <input type="text" /> */
+}
+{
+  /* <PlayersClass /> */
+}
+{
+  /* <ImageQuiz /> */
+}
+{
+  /* <PillFass /> */
+}
+{
+  /* <ExThree /> */
+}
+{
+  /* <ExClassTwo /> */
+}
+{
+  /* <ExClass /> */
+}
+{
+  /* <ExTwo /> */
+}
+{
+  /* <ExOne /> */
+}
+{
+  /* <Student /> */
+}
+{
+  /* <ClassComponent /> */
+}
+{
+  /* <Navbar />
       <div className="main">
         <Leftside />
         <Middleside />
         <Rightside />
-      </div> */}
-    </div>
+      </div> */
+}
+{
+  /* </div>
   );
-};
+}; */
+}
+
+// export default App;
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wordsList: ["Word1", "Word2", "Word3", "Word4"],
+      selectedWords: [],
+    };
+  }
+
+  handleWordClick = (word) => {
+    const { wordsList, selectedWords } = this.state;
+    const updatedWordsList = wordsList.filter((w) => w !== word);
+    this.setState({
+      wordsList: updatedWordsList,
+      selectedWords: [...selectedWords, word],
+    });
+  };
+
+  render() {
+    const { wordsList, selectedWords } = this.state;
+    return (
+      <div>
+        <h1>Word List</h1>
+        <ul>
+          {wordsList.map((word) => (
+            <li key={word} onClick={() => this.handleWordClick(word)}>
+              {word}
+            </li>
+          ))}
+        </ul>
+        <PropsTwo selectedWords={selectedWords} />
+      </div>
+    );
+  }
+}
 
 export default App;
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       buttons: ["Text 1", "Text 2", "Text 3", "Text 4"],
-//       T: [],
-//       valClicked: "",
-//     };
-//   }
-//   getValue = (e) => {
-//     this.se
-//   }
-//   render() {
-//     return (
-//       <div>
-//         {this.state.buttons.map((button) => (
-//           <div>
-//             <ul>
-//               <li value={button} onClick={} >{button}</li>
-//             </ul>
-//             <br />
-//           </div>
-//         ))}
-//       </div>
-//     );
-//   }
-// }
-// export default App;
