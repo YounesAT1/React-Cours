@@ -1,50 +1,53 @@
 /* styles.css */
-
+.red-row {
+  background-color: red;
+  color: white;
+}
 /* Container */
-div {
+/* div {
   font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-}
+} */
 
 /* Headings */
-h1 {
+/* h1 {
   font-size: 24px;
   margin-bottom: 10px;
-}
+} */
 
-h2 {
+/* h2 {
   font-size: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
-}
+} */
 
 /* Select inputs */
-select {
+/* select {
   padding: 8px;
   margin-right: 10px;
-}
+} */
 
 /* Text inputs */
-input[type="text"],
+/* input[type="text"],
 input[type="date"] {
   padding: 8px;
   margin-right: 10px;
   width: 150px;
-}
+} */
 
 /* Buttons */
-button {
+/* button {
   padding: 8px 16px;
-  background-color: #007bff; /* Blue color */
+  background-color: #007bff; 
   color: #fff;
   border: none;
   cursor: pointer;
-}
+} */
 
 /* Table */
-table {
+/* table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
@@ -55,22 +58,22 @@ table td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
-}
+} */
 
 /* Match History list */
-ul {
+/* ul {
   list-style: none;
   padding: 0;
 }
 
 ul li {
   margin-bottom: 5px;
-}
+} */
 
 /* Match History table */
-table tbody tr:nth-child(even) {
+/* table tbody tr:nth-child(even) {
   background-color: #f2f2f2;
-}
+} */
 
 /*  {
   margin: 0;
