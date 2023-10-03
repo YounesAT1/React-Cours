@@ -1,163 +1,147 @@
-import React from "react";
+import React, { Component } from "react";
 
-class ExClassTwo extends React.Component {
+class TpStagiaireNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      student: {
-        firstName: "",
-        lastName: "",
-        group: "",
-        mark: "",
-        module: "",
+      stagiaire: {
+        nom: "",
+        prenom: "",
+        groupe: "",
       },
-      students: [],
-      moduleData: [],
+      uneNote: {
+        module: "",
+        note: 0,
+      },
+      listeNotes: [],
+      resultat: {
+        moyenne: 0,
+        adminOuNon: "",
+      },
     };
-    this.groupOptions = ["FS-201", "FS-202", "FS-203"];
-    this.moduleOptions = ["Dev-FE", "Dev-BE", "SQL"];
+
+    this.groupes = ["groupe1", "groupe2", "groupe3"];
+    this.modules = ["module1", "module2"];
+    this.totalNote = 0;
   }
 
-  handleInputChange = (e) => {
+  getValue = (event) => {
+    const { name, value } = event.target;
     this.setState({
-      student: {
-        ...this.state.student,
-        [e.target.name]: e.target.value,
+      stagiaire: {
+        ...this.state.stagiaire,
+        [name]: value,
       },
     });
-    console.log(e.target.value);
   };
 
-  handleAddStudent = () => {
-    const existingStudent = this.state.students.find(
-      (student) =>
-        student.firstName === this.state.student.firstName &&
-        student.lastName === this.state.student.lastName &&
-        student.group === this.state.student.group
-    );
+  getNote = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      uneNote: {
+        ...this.state.uneNote,
+        [name]: value,
+      },
+    });
+  };
 
-    if (!existingStudent) {
-      const newStudent = {
-        ...this.state.student,
-      };
-      this.setState({
-        students: [...this.state.students, newStudent],
-        student: {
-          firstName: "",
-          lastName: "",
-          group: "",
-          module: "",
-          mark: "",
-        },
-        moduleData: [
-          ...this.state.moduleData,
-          { module: newStudent.module, mark: newStudent.mark },
-        ],
-      });
-    } else {
-      const updatedStudents = this.state.students.map((student) => {
-        if (
-          student.firstName === this.state.student.firstName &&
-          student.lastName === this.state.student.lastName &&
-          student.group === this.state.student.group
-        ) {
-          return {
-            ...student,
-            module: this.state.student.module,
-            mark: this.state.student.mark,
-          };
-        }
-        return student;
-      });
+  ajouter = () => {
+    const { note } = this.state.uneNote;
+    this.totalNote += parseFloat(note);
+    const moyenne = this.totalNote / (1 + this.state.listeNotes.length);
+    const adminOuNon = moyenne >= 10 ? "Admin" : "Non Admin";
 
-      const newStudentData = {
-        module: this.state.student.module,
-        mark: this.state.student.mark,
-      };
-
-      this.setState({
-        students: updatedStudents,
-        student: {
-          firstName: "",
-          lastName: "",
-          group: "",
-          module: "",
-          mark: "",
-        },
-        moduleData: [...this.state.moduleData, newStudentData],
-      });
-    }
+    this.setState((prevState) => ({
+      listeNotes: [...prevState.listeNotes, this.state.uneNote],
+      resultat: {
+        moyenne: moyenne,
+        adminOuNon: adminOuNon,
+      },
+    }));
   };
 
   render() {
     return (
       <div>
-        <div>
-          <label htmlFor="firstName">First Name : </label>
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            value={this.state.student.firstName}
-            onChange={this.handleInputChange}
-          />
-          <label htmlFor="lastName">Last Name :</label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            value={this.state.student.lastName}
-            onChange={this.handleInputChange}
-          />
-          <label htmlFor="group">Group :</label>
-          <select name="group" id="group" onChange={this.handleInputChange}>
-            {this.groupOptions.map((group) => (
-              <option value={group}>{group}</option>
-            ))}
-          </select>
-          <label htmlFor="module">Module :</label>
-          <select name="module" id="module" onChange={this.handleInputChange}>
-            {this.moduleOptions.map((module) => (
-              <option value={module}>{module}</option>
-            ))}
-          </select>
-          <label htmlFor="mark">Mark :</label>
-          <input
-            type="number"
-            name="mark"
-            id="mark"
-            value={this.state.student.mark}
-            onChange={this.handleInputChange}
-            min="0"
-            max="20"
-          />
-          <button onClick={this.handleAddStudent}>Add Student</button>
-        </div>
-        {this.state.students.map((student) => (
-          <div>
-            <p>First Name : {student.firstName}</p>
-            <p>last Name : {student.lastName}</p>
-            <p>group : {student.group}</p>
-          </div>
-        ))}
         <table>
-          <thead>
-            <tr>
-              <th>Module Name</th>
-              <th>Module Mark</th>
-            </tr>
-          </thead>
           <tbody>
-            {this.state.moduleData.map((data) => (
-              <tr>
-                <td>{data.module}</td>
-                <td>{data.mark}</td>
-              </tr>
-            ))}
+            <tr>
+              <td>Nom</td>
+              <td>
+                <input type="text" name="nom" onChange={this.getValue} />
+              </td>
+            </tr>
+            <tr>
+              <td>Prénom</td>
+              <td>
+                <input type="text" name="prenom" onChange={this.getValue} />
+              </td>
+            </tr>
+            <tr>
+              <td>Groupe</td>
+              <td>
+                <select name="groupe" onChange={this.getValue}>
+                  {this.groupes.map((g, index) => (
+                    <option key={index}>{g}</option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Module</td>
+              <td>
+                <select name="module" onChange={this.getNote}>
+                  {this.modules.map((m, index) => (
+                    <option key={index}>{m}</option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Note</td>
+              <td>
+                <input type="number" name="note" onChange={this.getNote} />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input type="button" value="Ajouter" onClick={this.ajouter} />
+              </td>
+            </tr>
           </tbody>
         </table>
+        <div>
+          <p>nom: {this.state.stagiaire.nom}</p>
+          <p>Prénom: {this.state.stagiaire.prenom}</p>
+          <p>Groupe: {this.state.stagiaire.groupe}</p>
+        </div>
+        <div>
+          <h3>Les notes</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Module</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.listeNotes.map((n, index) => (
+                <tr key={index}>
+                  <td>{n.module}</td>
+                  <td>{n.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <p>Moyenne: {this.state.resultat.moyenne}</p>
+          <b>{this.state.resultat.adminOuNon}</b>
+        </div>
       </div>
     );
   }
 }
-export default ExClassTwo;
+
+export default TpStagiaireNote;

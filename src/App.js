@@ -11,7 +11,7 @@ import "./App.css";
 // import RandomNumber from "./ClassComponent/RandomNumber";
 // import ExThree from "./ClassComponent/ExThree";
 // import ExClassTwo from "./ClassComponent/ExClassTwo";
-// import ExClass from "./ClassComponent/ExClass";
+// import TpStagiaireNote from "./ClassComponent/ExClassTwo";
 // import ExTwo from "./usestateExamples/ExTwo";
 // import ExOne from "./usestateExamples/ExOne";
 // import Student from "./ClassComponent/Student";
@@ -24,12 +24,14 @@ import "./App.css";
 // import Crud from "./ClassComponent/Crud";
 
 import React from "react";
-import Product from "./ExamPrep/Product";
+import Posts from "./ExamPrep/Exam1/Posts";
+// import Product from "./ExamPrep/Product";
 
 const App = () => {
   return (
     <div>
-      <Product />
+      <Posts />
+      {/* <TpStagiaireNote /> */}
     </div>
   );
 };
