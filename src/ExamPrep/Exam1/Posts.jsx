@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { Component } from "react";
 import "./Post.css";
+import { MoveLeft, MoveRight, Pencil, ThumbsUp, Trash } from "lucide-react";
 
 class Posts extends Component {
   constructor(props) {
@@ -95,7 +96,7 @@ class Posts extends Component {
     });
   };
 
-  handleIncrementLikes = (postId) => () => {
+  handleIncrementLikes = (postId) => {
     const updatedPostsList = this.state.postsList.map((post) => {
       if (post.id === postId) {
         return {
@@ -163,6 +164,7 @@ class Posts extends Component {
             <button
               className="action-button"
               onClick={this.handleConfirmUpdatePost}
+              style={{ backgroundColor: "green" }}
             >
               Edit
             </button>
@@ -185,43 +187,65 @@ class Posts extends Component {
                   <div className="middlePart">
                     <p>{post.text}</p>
                   </div>
-                  <div className="lowerPart">
+                  <div
+                    className="lowerPart"
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <button
                       className="action-button"
-                      onClick={this.handleIncrementLikes(post.id)}
+                      onClick={() => this.handleIncrementLikes(post.id)}
                     >
-                      Likes: {post.likes}
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <ThumbsUp width={15} height={15} />
+                        <span style={{ marginLeft: "5px" }}>
+                          Likes: {post.likes}
+                        </span>
+                      </div>
                     </button>
                     <button
                       className="action-button"
                       onClick={this.handleDeletePost(post.id)}
+                      style={{ backgroundColor: "red" }}
                     >
-                      Remove
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <Trash width={15} height={15} />
+                        <span style={{ marginLeft: "5px" }}>Remove</span>
+                      </div>
                     </button>
                     <button
                       className="action-button"
                       onClick={this.handleDisplayPostData(post)}
+                      style={{ backgroundColor: "green" }}
                     >
-                      Edit
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <Pencil width={15} height={15} />
+                        <span style={{ marginLeft: "5px" }}>Edit</span>
+                      </div>
                     </button>
                   </div>
                 </div>
               ))}
-              <div className="pagination">
+              <div className="pagination" style={{ display: "flex" }}>
                 <button
                   className="action-button"
-                  onClick={this.handlePageChange(currentPage - 1)}
+                  onClick={() => this.handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
+                  style={{ marginRight: "10px" }}
                 >
-                  Previous
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <MoveLeft width={15} height={15} />
+                    <span style={{ marginLeft: "5px" }}>Previous</span>
+                  </div>
                 </button>
-
                 <button
                   className="action-button"
-                  onClick={this.handlePageChange(currentPage + 1)}
+                  onClick={() => this.handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
                 >
-                  Next
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <span style={{ marginRight: "5px" }}>Next</span>
+                    <MoveRight width={15} height={15} />
+                  </div>
                 </button>
               </div>
             </div>
