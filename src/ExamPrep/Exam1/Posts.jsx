@@ -227,7 +227,9 @@ class Posts extends Component {
               ))}
               <div className="pagination" style={{ display: "flex" }}>
                 <button
-                  className="action-button"
+                  className={`action-button ${
+                    currentPage === 1 ? "disabled-button" : ""
+                  }`}
                   onClick={() => this.handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
                   style={{ marginRight: "10px" }}
@@ -238,7 +240,9 @@ class Posts extends Component {
                   </div>
                 </button>
                 <button
-                  className="action-button"
+                  className={`action-button ${
+                    currentPage === totalPages ? "disabled-button" : ""
+                  }`}
                   onClick={() => this.handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
                 >

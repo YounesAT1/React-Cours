@@ -1,8 +1,10 @@
 /* eslint-disable no-lone-blocks */
+import Crud from "./usestateExamples/Crud";
+// import ExThree from "./usestateExamples/ExThree";
 // import React, { Component } from "react";
 // import PropsOne from "./ClassComponent/props/propsOne/PropsOne";
 // import PropsTwo from "./ClassComponent/props/propsTwo/propsTwo";
-import "./App.css";
+// import "./App.css";
 // import PropsThree from "./ClassComponent/props/propsThree/PropsThree";
 // import PropsThreeTotal from "./ClassComponent/props/propsThree/PropsThreeTotal";
 // import PlayersClass from "./ClassComponent/PlayersClass";
@@ -23,14 +25,16 @@ import "./App.css";
 
 // import Crud from "./ClassComponent/Crud";
 
-import React from "react";
-import Posts from "./ExamPrep/Exam1/Posts";
+// import React from "react";
+// import Posts from "./ExamPrep/Exam1/Posts";
 // import Product from "./ExamPrep/Product";
 
 const App = () => {
   return (
     <div>
-      <Posts />
+      <Crud />
+      {/* <ExThree /> */}
+      {/* <Posts /> */}
       {/* <TpStagiaireNote /> */}
     </div>
   );
