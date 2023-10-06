@@ -15,6 +15,7 @@ const Crud = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [clientsPerPage] = useState(2);
+  const [alert, setAlert] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +36,9 @@ const Crud = () => {
 
       setClientsList((prevClients) => [...prevClients, newClient]);
       setClient(initialClientState);
+      setAlert("");
+    } else {
+      setAlert("Please fill out all fields !!");
     }
   };
 
@@ -90,7 +94,7 @@ const Crud = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Clients Management</h1>
+      <h1>Clients : {clientsList.length}</h1>
       <label htmlFor="firstName">First Name:</label>
       <br />
       <input
@@ -99,7 +103,7 @@ const Crud = () => {
         name="firstName"
         value={client.firstName}
         onChange={handleInputChange}
-        style={{ width: "30%", height: "30px" }}
+        style={{ width: "30%", height: "30px", borderRadius: "5px" }}
       />
       <br />
       <label htmlFor="lastName">Last Name:</label>
@@ -110,7 +114,7 @@ const Crud = () => {
         name="lastName"
         value={client.lastName}
         onChange={handleInputChange}
-        style={{ width: "30%", height: "30px" }}
+        style={{ width: "30%", height: "30px", borderRadius: "5px" }}
       />
       <br />
       <label htmlFor="email">Email:</label>
@@ -121,7 +125,7 @@ const Crud = () => {
         name="email"
         value={client.email}
         onChange={handleInputChange}
-        style={{ width: "30%", height: "30px" }}
+        style={{ width: "30%", height: "30px", borderRadius: "5px" }}
       />
       <br />
       <label htmlFor="sex">Sex:</label>
@@ -156,6 +160,8 @@ const Crud = () => {
             padding: "8px 16px",
             border: "none",
             cursor: "pointer",
+            margin: "8px",
+            borderRadius: "5px",
           }}
         >
           Add Client
@@ -169,11 +175,14 @@ const Crud = () => {
             padding: "8px 16px",
             border: "none",
             cursor: "pointer",
+            margin: "8px",
+            borderRadius: "5px",
           }}
         >
           Update Client
         </button>
       )}
+      {alert && <h2 style={{ color: "red" }}>{alert}</h2>}
       {currentClients.length > 0 && (
         <table style={tableStyle}>
           <thead>
@@ -202,6 +211,7 @@ const Crud = () => {
                       border: "none",
                       cursor: "pointer",
                       marginRight: "4px",
+                      borderRadius: "5px",
                     }}
                   >
                     Delete
@@ -214,6 +224,7 @@ const Crud = () => {
                       padding: "4px 8px",
                       border: "none",
                       cursor: "pointer",
+                      borderRadius: "5px",
                     }}
                   >
                     Edit
@@ -224,14 +235,14 @@ const Crud = () => {
           </tbody>
         </table>
       )}
-      <div className="pagination" style={{ display: "flex" }}>
+      <div className="pagination" style={{ display: "flex", marginTop: "8px" }}>
         <button
           className={`action-button ${
             currentPage === 1 ? "disabled-button" : ""
           }`}
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1 || currentClients.length === 0}
-          style={{ marginRight: "10px" }}
+          style={{ marginRight: "10px", borderRadius: "5px" }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <MoveLeft width={15} height={15} />
@@ -244,6 +255,7 @@ const Crud = () => {
           }`}
           onClick={() => setCurrentPage(currentPage + 1)}
           disabled={currentPage === totalPages || currentClients.length === 0}
+          style={{ borderRadius: "5px" }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "5px" }}>Next</span>
