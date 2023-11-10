@@ -1,0 +1,34 @@
+.meal-tracker-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+}
+
+.add-meal-section {
+  margin-bottom: 20px;
+}
+
+.add-meal-section label {
+  margin-right: 10px;
+}
+
+.meal-list-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.meal-list-section li {
+  margin-bottom: 5px;
+}
+
+.daily-stats-section {
+  margin-top: 20px;
+}
+
+.daily-stats-section p {
+  margin: 5px 0;
+}

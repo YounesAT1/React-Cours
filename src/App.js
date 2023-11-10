@@ -1,5 +1,5 @@
 /* eslint-disable no-lone-blocks */
-import Crud from "./usestateExamples/Crud";
+// import Crud from "./usestateExamples/Crud";
 // import ExThree from "./usestateExamples/ExThree";
 // import React, { Component } from "react";
 // import PropsOne from "./ClassComponent/props/propsOne/PropsOne";
@@ -23,16 +23,89 @@ import Crud from "./usestateExamples/Crud";
 // import Navbar from "./facebookComponents/Navbar/Navbar";
 // import Rightside from "./facebookComponents/Rightside/Rightside";
 
+import MealTracker from "./RemoteExercices/Meal/MealTracker";
+
+// import Expence from "./RemoteExercices/ExpenceTracker/Expence";
+
 // import Crud from "./ClassComponent/Crud";
 
 // import React from "react";
 // import Posts from "./ExamPrep/Exam1/Posts";
 // import Product from "./ExamPrep/Product";
 
+// import React, { useState } from "react";
+// import "./App.css";
+// import MealForm from "./RemoteExercices/Meal/MealForm";
+// import MealList from "./RemoteExercices/Meal/MealList";
+// import DailyStats from "./RemoteExercices/Meal/DailyStats";
+
+// const foodData = [
+//   { name: "Pomme", calories: 52, protein: 0.3, carbs: 14, fat: 14, price: 2 },
+//   { name: "Banana", calories: 89, protein: 1.1, carbs: 23, fat: 0.3, price: 2 },
+//   {
+//     name: "Poulet grille",
+//     calories: 165,
+//     protein: 31,
+//     carbs: 0,
+//     fat: 3.6,
+//     price: 100,
+//   },
+// ];
+
+// const App = () => {
+//   const [meals, setMeals] = useState([]);
+//   const [dailyStats, setDailyStats] = useState({
+//     totalCalories: 0,
+//     totalProtein: 0,
+//     totalCarbs: 0,
+//     totalFat: 0,
+//     totalPrice: 0,
+//   });
+
+//   const addMeal = (meal) => {
+//     setMeals([...meals, meal]);
+//     updateDailyStats(meal, true);
+//   };
+
+//   const removeMeal = (index) => {
+//     const removedMeal = meals[index];
+//     setMeals(meals.filter((_, i) => i !== index));
+//     updateDailyStats(removedMeal, false);
+//   };
+
+//   const updateDailyStats = (meal, isAddition) => {
+//     const factor = isAddition ? 1 : -1;
+
+//     setDailyStats((prevStats) => ({
+//       totalCalories:
+//         prevStats.totalCalories + factor * meal.calories * meal.quantity,
+//       totalProtein:
+//         prevStats.totalProtein + factor * meal.protein * meal.quantity,
+//       totalCarbs: prevStats.totalCarbs + factor * meal.carbs * meal.quantity,
+//       totalFat: prevStats.totalFat + factor * meal.fat * meal.quantity,
+//       totalPrice: prevStats.totalPrice + factor * meal.totalPrice,
+//     }));
+//   };
+
+//   return (
+//     <div className="App">
+//       <h1>Meal Calculator</h1>
+//       <MealForm foodData={foodData} addMeal={addMeal} />
+//       <MealList meals={meals} removeMeal={removeMeal} />
+//       <DailyStats stats={dailyStats} />
+//     </div>
+//   );
+// };
+
+// export default App;
+
 const App = () => {
   return (
     <div>
-      <Crud />
+      <MealTracker />
+      {/* <Expence /> */}
+
+      {/* <Crud /> */}
       {/* <ExThree /> */}
       {/* <Posts /> */}
       {/* <TpStagiaireNote /> */}
