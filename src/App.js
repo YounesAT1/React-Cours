@@ -23,7 +23,8 @@
 // import Navbar from "./facebookComponents/Navbar/Navbar";
 // import Rightside from "./facebookComponents/Rightside/Rightside";
 
-import MealTracker from "./RemoteExercices/Meal/MealTracker";
+import Cart from "./RemoteExercices/Cart/Cart";
+// import MealTracker from "./RemoteExercices/Meal/MealTracker";
 
 // import Expence from "./RemoteExercices/ExpenceTracker/Expence";
 
@@ -102,7 +103,8 @@ import MealTracker from "./RemoteExercices/Meal/MealTracker";
 const App = () => {
   return (
     <div>
-      <MealTracker />
+      <Cart />
+      {/* <MealTracker /> */}
       {/* <Expence /> */}
 
       {/* <Crud /> */}

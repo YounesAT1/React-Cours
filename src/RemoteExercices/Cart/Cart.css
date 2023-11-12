@@ -1,0 +1,97 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.input_controle {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.items_container {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+/* Style for the checkbox icons */
+.lucide-react {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+/* Style for the counter buttons */
+div > button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  margin: 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+div > button:hover {
+  background-color: #2980b9;
+}
+
+span {
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+/* Style for error message */
+div > h3 {
+  color: #e74c3c;
+}
+
+/* Style for total count */
+div > h4 {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #2ecc71;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.unchecked {
+  text-decoration: line-through;
+}
