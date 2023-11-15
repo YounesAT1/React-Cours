@@ -80,7 +80,11 @@ const Cart = () => {
             <p style={{ color: "gray" }}>No item for now !!</p>
           ) : (
             list.map((listItem, index) => (
-              <div key={listItem.id} className="flex">
+              <div
+                key={listItem.id}
+                className="flex"
+                style={{ margin: "10px 0px" }}
+              >
                 {listItem.checked ? (
                   <CheckCircle2
                     onClick={() => handleCompleteOrIncomplete(index)}

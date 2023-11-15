@@ -50,13 +50,11 @@ li {
   font-size: 16px;
 }
 
-/* Style for the checkbox icons */
 .lucide-react {
   cursor: pointer;
   margin-right: 5px;
 }
 
-/* Style for the counter buttons */
 div > button {
   background-color: #3498db;
   color: #fff;
@@ -76,12 +74,10 @@ span {
   margin: 0 5px;
 }
 
-/* Style for error message */
 div > h3 {
   color: #e74c3c;
 }
 
-/* Style for total count */
 div > h4 {
   margin-top: 20px;
   font-size: 18px;
