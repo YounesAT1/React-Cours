@@ -1,3 +1,123 @@
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import PostsList from "./api/CRUD/Posts/PostsList";
+import AddPost from "./api/CRUD/Posts/AddPost";
+import UpdatePost from "./api/CRUD/Posts/UpdatePost";
+import CommentsList from "./api/CRUD/Comments/CommentsList";
+import AddComment from "./api/CRUD/Comments/AddComment";
+import UpdateComment from "./api/CRUD/Comments/UpdateComment";
+
+const App = () => {
+  const navStyle = {
+    background: "#007bff",
+    padding: "10px",
+  };
+
+  const linkStyle = {
+    marginRight: "20px",
+    color: "#fff",
+    textDecoration: "none",
+    fontSize: "16px",
+    fontWeight: "bold",
+  };
+
+  return (
+    <div>
+      <Router>
+        <nav style={navStyle}>
+          <ul
+            style={{
+              listStyle: "none",
+              margin: 0,
+              padding: 0,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <li style={{ display: "inline" }}>
+              <Link to="/Posts" style={linkStyle}>
+                Posts List
+              </Link>
+            </li>
+            <li style={{ display: "inline" }}>
+              <Link to="/Posts/add" style={linkStyle}>
+                Add a post
+              </Link>
+            </li>
+            <li style={{ display: "inline" }}>
+              <Link to="/Comments" style={linkStyle}>
+                Comments List
+              </Link>
+            </li>
+            <li style={{ display: "inline" }}>
+              <Link to="/Comments/add" style={linkStyle}>
+                Add a comment
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/Posts" element={<PostsList />} />
+          <Route path="/Posts/add" element={<AddPost />} />
+          <Route path="/Posts/update" element={<UpdatePost />} />
+
+          <Route path="/Comments" element={<CommentsList />} />
+          <Route path="/Comments/add" element={<AddComment />} />
+          <Route path="/Comments/update" element={<UpdateComment />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+};
+
+export default App;
+
+// import React from "react";
+// import About from "./routageComponents/Ex1/About";
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   Link,
+//   useNavigate,
+// } from "react-router-dom";
+
+// const App = () => {
+//   const navigate = useNavigate();
+
+//   const backToHome = () => {
+//     navigate("/");
+//   };
+
+//   return (
+//     <Router>
+//       <div>
+//         <nav>
+//           <ul>
+//             <li>
+//               <Link to="/about/Jhon">Jhon</Link>
+//             </li>
+//             <li>
+//               <Link to="/about/Jean">Jean</Link>
+//             </li>
+//             <li>
+//               <Link to="/">Home</Link>
+//             </li>
+//           </ul>
+//         </nav>
+//         <Routes>
+//           <Route path="/about/:userName" element={<About />} />
+//           <Route
+//             path="/"
+//             element={<button onClick={backToHome}>Home</button>}
+//           />
+//         </Routes>
+//       </div>
+//     </Router>
+//   );
+// };
+
+// export default App;
+
 /* eslint-disable no-lone-blocks */
 // import Crud from "./usestateExamples/Crud";
 // import ExThree from "./usestateExamples/ExThree";
@@ -23,7 +143,7 @@
 // import Navbar from "./facebookComponents/Navbar/Navbar";
 // import Rightside from "./facebookComponents/Rightside/Rightside";
 
-import Cart from "./RemoteExercices/Cart/Cart";
+// import Cart from "./RemoteExercices/Cart/Cart";
 // import MealTracker from "./RemoteExercices/Meal/MealTracker";
 
 // import Expence from "./RemoteExercices/ExpenceTracker/Expence";
@@ -100,22 +220,22 @@ import Cart from "./RemoteExercices/Cart/Cart";
 
 // export default App;
 
-const App = () => {
-  return (
-    <div>
-      <Cart />
-      {/* <MealTracker /> */}
-      {/* <Expence /> */}
+// const App = () => {
+//   return (
+//     <div>
+//       {/* <Cart /> */}
+//       {/* <MealTracker /> */}
+//       {/* <Expence /> */}
 
-      {/* <Crud /> */}
-      {/* <ExThree /> */}
-      {/* <Posts /> */}
-      {/* <TpStagiaireNote /> */}
-    </div>
-  );
-};
+//       {/* <Crud /> */}
+//       {/* <ExThree /> */}
+//       {/* <Posts /> */}
+//       {/* <TpStagiaireNote /> */}
+//     </div>
+//   );
+// };
 
-export default App;
+// export default App;
 
 // const App = () => {
 //   return (
