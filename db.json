@@ -1,6 +1,38 @@
 {
-  "posts": [],
-  "comments": [],
+  "posts": [
+    {
+      "id": "1",
+      "title": "Post Number One",
+      "author": "Author One"
+    },
+    {
+      "id": "2",
+      "title": "Post Number Two",
+      "author": "Author Two"
+    },
+    {
+      "id": "3",
+      "title": "Post Number Three",
+      "author": "Author three"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "title": "Comment Number One",
+      "author": "Author One"
+    },
+    {
+      "id": "2",
+      "title": "Comment Number Two",
+      "author": "Author two"
+    },
+    {
+      "id": "3",
+      "title": "Comment Number Three",
+      "author": "Author three"
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

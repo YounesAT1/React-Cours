@@ -1,75 +1,155 @@
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import PostsList from "./api/CRUD/Posts/PostsList";
-import AddPost from "./api/CRUD/Posts/AddPost";
-import UpdatePost from "./api/CRUD/Posts/UpdatePost";
-import CommentsList from "./api/CRUD/Comments/CommentsList";
-import AddComment from "./api/CRUD/Comments/AddComment";
-import UpdateComment from "./api/CRUD/Comments/UpdateComment";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct, updateProduct, deleteProduct } from "./redux/CRUD/actions";
 
 const App = () => {
-  const navStyle = {
-    background: "#007bff",
-    padding: "10px",
+  const products = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const [newProduct, setNewProduct] = useState({
+    label: "",
+    price: 0,
+    quantity: 0,
+  });
+
+  const handleAddProduct = () => {
+    dispatch(addProduct({ ...newProduct, id: Date.now() }));
+    setNewProduct({ label: "", price: 0, quantity: 0 });
   };
 
-  const linkStyle = {
-    marginRight: "20px",
-    color: "#fff",
-    textDecoration: "none",
-    fontSize: "16px",
-    fontWeight: "bold",
+  const handleUpdateProduct = (id, updatedProduct) => {
+    dispatch(updateProduct(id, updatedProduct));
   };
 
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteProduct(id));
+  };
   return (
-    <div>
-      <Router>
-        <nav style={navStyle}>
-          <ul
-            style={{
-              listStyle: "none",
-              margin: 0,
-              padding: 0,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <li style={{ display: "inline" }}>
-              <Link to="/Posts" style={linkStyle}>
-                Posts List
-              </Link>
-            </li>
-            <li style={{ display: "inline" }}>
-              <Link to="/Posts/add" style={linkStyle}>
-                Add a post
-              </Link>
-            </li>
-            <li style={{ display: "inline" }}>
-              <Link to="/Comments" style={linkStyle}>
-                Comments List
-              </Link>
-            </li>
-            <li style={{ display: "inline" }}>
-              <Link to="/Comments/add" style={linkStyle}>
-                Add a comment
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/Posts" element={<PostsList />} />
-          <Route path="/Posts/add" element={<AddPost />} />
-          <Route path="/Posts/update" element={<UpdatePost />} />
-
-          <Route path="/Comments" element={<CommentsList />} />
-          <Route path="/Comments/add" element={<AddComment />} />
-          <Route path="/Comments/update" element={<UpdateComment />} />
-        </Routes>
-      </Router>
-    </div>
+    <>
+      <h1>Products List : </h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            {product.label} - {product.price} - {product.quantity}
+            <button
+              onClick={() =>
+                handleUpdateProduct(product.id, {
+                  ...product,
+                  quantity: product.quantity + 1,
+                })
+              }
+            >
+              Increment Quantity
+            </button>
+            <button onClick={() => handleDeleteProduct(product.id)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+      <h2>Add a product :</h2>
+      <label htmlFor="label">Label : </label>
+      <input
+        type="text"
+        id="label"
+        value={newProduct.label}
+        onChange={(e) =>
+          setNewProduct({ ...newProduct, label: e.target.value })
+        }
+      />
+      <label htmlFor="price">Price : </label>
+      <input
+        type="number"
+        id="price"
+        value={newProduct.price}
+        onChange={(e) =>
+          setNewProduct({ ...newProduct, price: e.target.value })
+        }
+      />
+      <label htmlFor="quantity">Quantity : </label>
+      <input
+        type="number"
+        id="quantity"
+        value={newProduct.quantity}
+        onChange={(e) =>
+          setNewProduct({ ...newProduct, quantity: e.target.value })
+        }
+      />
+      <button onClick={handleAddProduct}>Add Product</button>
+    </>
   );
 };
 
 export default App;
+
+// import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+// import { CommentsList, AddComment, UpdateComment } from "./api/CRUD/Comments";
+// import { PostsList, AddPost, UpdatePost } from "./api/CRUD/Posts";
+
+// const App = () => {
+//   const navStyle = {
+//     background: "#007bff",
+//     padding: "10px",
+//   };
+
+//   const linkStyle = {
+//     marginRight: "20px",
+//     color: "#fff",
+//     textDecoration: "none",
+//     fontSize: "16px",
+//     fontWeight: "bold",
+//   };
+
+//   return (
+//     <div>
+//       <Router>
+//         <nav style={navStyle}>
+//           <ul
+//             style={{
+//               listStyle: "none",
+//               margin: 0,
+//               padding: 0,
+//               display: "flex",
+//               justifyContent: "space-between",
+//             }}
+//           >
+//             <li style={{ display: "inline" }}>
+//               <Link to="/Posts" style={linkStyle}>
+//                 Posts List
+//               </Link>
+//             </li>
+//             <li style={{ display: "inline" }}>
+//               <Link to="/Posts/add" style={linkStyle}>
+//                 Add a post
+//               </Link>
+//             </li>
+//             <li style={{ display: "inline" }}>
+//               <Link to="/Comments" style={linkStyle}>
+//                 Comments List
+//               </Link>
+//             </li>
+//             <li style={{ display: "inline" }}>
+//               <Link to="/Comments/add" style={linkStyle}>
+//                 Add a comment
+//               </Link>
+//             </li>
+//           </ul>
+//         </nav>
+
+//         <Routes>
+//           <Route path="/Posts" element={<PostsList />} />
+//           <Route path="/Posts/add" element={<AddPost />} />
+//           <Route path="/Posts/update" element={<UpdatePost />} />
+
+//           <Route path="/Comments" element={<CommentsList />} />
+//           <Route path="/Comments/add" element={<AddComment />} />
+//           <Route path="/Comments/update" element={<UpdateComment />} />
+//         </Routes>
+//       </Router>
+//     </div>
+//   );
+// };
+
+// export default App;
 
 // import React from "react";
 // import About from "./routageComponents/Ex1/About";
