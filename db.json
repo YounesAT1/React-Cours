@@ -33,6 +33,16 @@
       "author": "Author three"
     }
   ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Watch redux tutorials"
+    },
+    {
+      "id": 2,
+      "title": "Apply what u learned "
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

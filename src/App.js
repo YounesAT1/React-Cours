@@ -1,85 +1,283 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addProduct, updateProduct, deleteProduct } from "./redux/CRUD/actions";
+//! Redux ex 2
+
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchTasks,
+  addTask,
+  deleteTask,
+  updateTask,
+} from "./redux/Tasks/actions";
+import axios from "axios";
+
+const apiUrl = "http://localhost:3004/tasks";
 
 const App = () => {
-  const products = useSelector((state) => state.products);
+  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
-  const [newProduct, setNewProduct] = useState({
-    label: "",
-    price: 0,
-    quantity: 0,
-  });
+  const [newTask, setNewTask] = useState("");
+  const [selectedTask, setSelectedTask] = useState(null);
 
-  const handleAddProduct = () => {
-    dispatch(addProduct({ ...newProduct, id: Date.now() }));
-    setNewProduct({ label: "", price: 0, quantity: 0 });
+  useEffect(() => {
+    axios.get(apiUrl).then((res) => dispatch(fetchTasks(res.data)));
+  }, [dispatch]);
+
+  const handleAddTask = () => {
+    axios.post(apiUrl, { title: newTask }).then((res) => {
+      dispatch(addTask(res.data));
+      setNewTask("");
+    });
   };
 
-  const handleUpdateProduct = (id, updatedProduct) => {
-    dispatch(updateProduct(id, updatedProduct));
+  const handleDeleteTask = (id) => {
+    axios.delete(`${apiUrl}/${id}`).then(() => dispatch(deleteTask(id)));
   };
 
-  const handleDeleteProduct = (id) => {
-    dispatch(deleteProduct(id));
+  const handleSelectedTask = (task) => {
+    setSelectedTask(task);
+    setNewTask(task.title);
   };
+
+  const handleUpdateTask = () => {
+    if (selectedTask) {
+      dispatch(updateTask(selectedTask.id, { title: newTask }));
+      setSelectedTask(null);
+      setNewTask("");
+    }
+  };
+
+  const inputStyle = {
+    padding: "8px",
+    marginBottom: "10px",
+    width: "300px",
+  };
+
+  const buttonStyle = {
+    padding: "8px 16px",
+    margin: "0 5px",
+    borderRadius: "5px",
+    border: "none",
+    cursor: "pointer",
+  };
+
   return (
-    <>
-      <h1>Products List : </h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            {product.label} - {product.price} - {product.quantity}
-            <button
-              onClick={() =>
-                handleUpdateProduct(product.id, {
-                  ...product,
-                  quantity: product.quantity + 1,
-                })
-              }
-            >
-              Increment Quantity
-            </button>
-            <button onClick={() => handleDeleteProduct(product.id)}>
-              Delete
-            </button>
+    <div style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
+      <h1 style={{ color: "#3498db" }}>Tasks List</h1>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {tasks.map((task) => (
+          <li
+            key={task.id}
+            style={{
+              backgroundColor: "#f5f5f5",
+              padding: "10px",
+              margin: "10px 0",
+              borderRadius: "5px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span>{task.title}</span>
+            <div>
+              <button
+                onClick={() => handleDeleteTask(task.id)}
+                style={{
+                  ...buttonStyle,
+                  backgroundColor: "#e74c3c",
+                  color: "white",
+                }}
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => handleSelectedTask(task)}
+                style={{
+                  ...buttonStyle,
+                  backgroundColor: "#3498db",
+                  color: "white",
+                }}
+              >
+                Update
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-      <h2>Add a product :</h2>
-      <label htmlFor="label">Label : </label>
-      <input
-        type="text"
-        id="label"
-        value={newProduct.label}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, label: e.target.value })
-        }
-      />
-      <label htmlFor="price">Price : </label>
-      <input
-        type="number"
-        id="price"
-        value={newProduct.price}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, price: e.target.value })
-        }
-      />
-      <label htmlFor="quantity">Quantity : </label>
-      <input
-        type="number"
-        id="quantity"
-        value={newProduct.quantity}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, quantity: e.target.value })
-        }
-      />
-      <button onClick={handleAddProduct}>Add Product</button>
-    </>
+      <h1 style={{ color: "#3498db" }}>
+        {selectedTask ? "Update a task" : "Add a task"}
+      </h1>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          placeholder="Task Title"
+          style={{ ...inputStyle }}
+        />
+        <button
+          onClick={selectedTask ? handleUpdateTask : handleAddTask}
+          style={{
+            ...buttonStyle,
+            backgroundColor: selectedTask ? "#3498db" : "#2ecc71",
+            color: "white",
+            marginBottom: "10px",
+          }}
+        >
+          {selectedTask ? "Update" : "Add"}
+        </button>
+      </div>
+    </div>
   );
 };
 
 export default App;
+
+//! Redux ex 1
+// import { useState } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { addProduct, updateProduct, deleteProduct } from "./redux/CRUD/actions";
+
+// const App = () => {
+//   const products = useSelector((state) => state.products);
+//   const dispatch = useDispatch();
+//   const [newProduct, setNewProduct] = useState({
+//     label: "",
+//     price: 0,
+//     quantity: 0,
+//   });
+
+//   const [selectedProduct, setSelectedProduct] = useState(null);
+
+//   const handleAddProduct = () => {
+//     dispatch(addProduct({ ...newProduct, id: Date.now() }));
+//     setNewProduct({ label: "", price: 0, quantity: 0 });
+//   };
+
+//   const handleUpdateProduct = () => {
+//     if (selectedProduct) {
+//       dispatch(updateProduct(selectedProduct.id, newProduct));
+//       setSelectedProduct(null);
+//       setNewProduct({ label: "", price: 0, quantity: 0 });
+//     }
+//   };
+
+//   const handleDeleteProduct = (id) => {
+//     dispatch(deleteProduct(id));
+//   };
+
+//   const handleSelectProduct = (product) => {
+//     setSelectedProduct(product);
+//     setNewProduct(product);
+//   };
+
+//   const inputStyle = {
+//     padding: "8px",
+//     marginBottom: "10px",
+//     width: "200px",
+//   };
+
+//   const buttonStyle = {
+//     padding: "8px 16px",
+//     margin: "0 5px",
+//     borderRadius: "5px",
+//     border: "none",
+//     cursor: "pointer",
+//   };
+
+//   return (
+//     <div style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
+//       <h1 style={{ color: "#3498db" }}>Products List</h1>
+//       <ul style={{ listStyle: "none", padding: 0 }}>
+//         {products.map((product) => (
+//           <li
+//             key={product.id}
+//             style={{
+//               backgroundColor: "#f5f5f5",
+//               padding: "10px",
+//               margin: "10px 0",
+//               borderRadius: "5px",
+//               display: "flex",
+//               justifyContent: "space-between",
+//               alignItems: "center",
+//             }}
+//           >
+//             <div>
+//               <strong>{product.label}</strong> - ${product.price} -{" "}
+//               {product.quantity} in stock
+//             </div>
+//             <div>
+//               <button
+//                 onClick={() => handleSelectProduct(product)}
+//                 style={{
+//                   ...buttonStyle,
+//                   backgroundColor: "#2ecc71",
+//                   color: "white",
+//                 }}
+//               >
+//                 Edit
+//               </button>
+//               <button
+//                 onClick={() => handleDeleteProduct(product.id)}
+//                 style={{
+//                   ...buttonStyle,
+//                   backgroundColor: "#e74c3c",
+//                   color: "white",
+//                 }}
+//               >
+//                 Delete
+//               </button>
+//             </div>
+//           </li>
+//         ))}
+//       </ul>
+//       <h2 style={{ color: "#3498db" }}>
+//         {selectedProduct ? "Update Product" : "Add Product"}
+//       </h2>
+//       <div style={{ display: "flex", justifyContent: "center" }}>
+//         <input
+//           type="text"
+//           value={newProduct.label}
+//           onChange={(e) =>
+//             setNewProduct({ ...newProduct, label: e.target.value })
+//           }
+//           placeholder="Product Name"
+//           style={{ ...inputStyle }}
+//         />
+//         <input
+//           type="number"
+//           value={newProduct.price}
+//           onChange={(e) =>
+//             setNewProduct({ ...newProduct, price: e.target.value })
+//           }
+//           placeholder="Price"
+//           style={{ ...inputStyle }}
+//         />
+//         <input
+//           type="number"
+//           value={newProduct.quantity}
+//           onChange={(e) =>
+//             setNewProduct({ ...newProduct, quantity: e.target.value })
+//           }
+//           placeholder="Quantity"
+//           style={{ ...inputStyle }}
+//         />
+//         <button
+//           onClick={selectedProduct ? handleUpdateProduct : handleAddProduct}
+//           style={{
+//             ...buttonStyle,
+//             backgroundColor: selectedProduct ? "#3498db" : "#2ecc71",
+//             color: "white",
+//             marginBottom: "8px",
+//           }}
+//         >
+//           {selectedProduct ? "Update" : "Add"}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
 
 // import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 // import { CommentsList, AddComment, UpdateComment } from "./api/CRUD/Comments";
