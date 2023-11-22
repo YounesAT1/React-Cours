@@ -1,136 +1,221 @@
-//! Redux ex 2
-
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchTasks,
-  addTask,
-  deleteTask,
-  updateTask,
-} from "./redux/Tasks/actions";
+//! Social app
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { AddFriend, AddMessage, AddPost } from "./redux/Social/components";
+import { useSelector, useDispatch } from "react-redux";
+import { AddComment, addLike, fetchPosts } from "./redux/Social/actions";
 import axios from "axios";
 
-const apiUrl = "http://localhost:3004/tasks";
-
 const App = () => {
-  const tasks = useSelector((state) => state.tasks);
+  const API_URL = "http://localhost:3004/Posts";
+  const posts = useSelector((state) => state.Posts);
   const dispatch = useDispatch();
-  const [newTask, setNewTask] = useState("");
-  const [selectedTask, setSelectedTask] = useState(null);
+  const [comment, setComment] = useState({});
 
   useEffect(() => {
-    axios.get(apiUrl).then((res) => dispatch(fetchTasks(res.data)));
+    axios.get(API_URL).then((res) => dispatch(fetchPosts(res.data)));
   }, [dispatch]);
 
-  const handleAddTask = () => {
-    axios.post(apiUrl, { title: newTask }).then((res) => {
-      dispatch(addTask(res.data));
-      setNewTask("");
-    });
+  const handleAddComment = (postId) => {
+    const commentToAdd = comment[postId];
+
+    dispatch(AddComment(postId, commentToAdd));
+
+    setComment({ ...comment, [postId]: "" });
   };
 
-  const handleDeleteTask = (id) => {
-    axios.delete(`${apiUrl}/${id}`).then(() => dispatch(deleteTask(id)));
-  };
-
-  const handleSelectedTask = (task) => {
-    setSelectedTask(task);
-    setNewTask(task.title);
-  };
-
-  const handleUpdateTask = () => {
-    if (selectedTask) {
-      dispatch(updateTask(selectedTask.id, { title: newTask }));
-      setSelectedTask(null);
-      setNewTask("");
-    }
-  };
-
-  const inputStyle = {
-    padding: "8px",
-    marginBottom: "10px",
-    width: "300px",
-  };
-
-  const buttonStyle = {
-    padding: "8px 16px",
-    margin: "0 5px",
-    borderRadius: "5px",
-    border: "none",
-    cursor: "pointer",
+  const handleAddLike = (idPost, post) => {
+    dispatch(addLike(idPost, post));
   };
 
   return (
-    <div style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
-      <h1 style={{ color: "#3498db" }}>Tasks List</h1>
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {tasks.map((task) => (
-          <li
-            key={task.id}
-            style={{
-              backgroundColor: "#f5f5f5",
-              padding: "10px",
-              margin: "10px 0",
-              borderRadius: "5px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <span>{task.title}</span>
-            <div>
-              <button
-                onClick={() => handleDeleteTask(task.id)}
-                style={{
-                  ...buttonStyle,
-                  backgroundColor: "#e74c3c",
-                  color: "white",
-                }}
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => handleSelectedTask(task)}
-                style={{
-                  ...buttonStyle,
-                  backgroundColor: "#3498db",
-                  color: "white",
-                }}
-              >
-                Update
-              </button>
-            </div>
+    <div>
+      <h1>Social App</h1>
+      <Router>
+        <ul>
+          <li>
+            <Link to="/addPost">Add Post</Link>
           </li>
-        ))}
-      </ul>
-      <h1 style={{ color: "#3498db" }}>
-        {selectedTask ? "Update a task" : "Add a task"}
-      </h1>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <input
-          type="text"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          placeholder="Task Title"
-          style={{ ...inputStyle }}
-        />
-        <button
-          onClick={selectedTask ? handleUpdateTask : handleAddTask}
-          style={{
-            ...buttonStyle,
-            backgroundColor: selectedTask ? "#3498db" : "#2ecc71",
-            color: "white",
-            marginBottom: "10px",
-          }}
-        >
-          {selectedTask ? "Update" : "Add"}
-        </button>
-      </div>
+          <li>
+            <Link to="/addFriend">Friends 0</Link>
+          </li>
+          <li>
+            <Link to="/addMessage">Messages 0</Link>
+          </li>
+        </ul>
+        <Routes>
+          <Route path="/addPost" element={<AddPost />}></Route>
+          <Route path="/addFriend" element={<AddFriend />}></Route>
+          <Route path="/addMessage" element={<AddMessage />}></Route>
+        </Routes>
+      </Router>
+      {posts.map((post) => (
+        <div key={post.id}>
+          <p>{post.content}</p>
+          <button onClick={() => handleAddLike(post.id, post)}>
+            Likes {post.likes}
+          </button>
+          <input
+            type="text"
+            value={comment[post.id]}
+            onChange={(e) =>
+              setComment({
+                ...comment,
+                [post.id]: e.target.value,
+              })
+            }
+          />
+          <button onClick={() => handleAddComment(post.id)}>
+            Add a Comment
+          </button>
+          <ul>
+            {post.comment &&
+              Array.isArray(post.comment) &&
+              post.comment.map((comment, index) => (
+                <li key={index}>{comment}</li>
+              ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
 
 export default App;
+
+//! Redux ex 2
+
+// import { useState, useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   fetchTasks,
+//   addTask,
+//   deleteTask,
+//   updateTask,
+// } from "./redux/Tasks/actions";
+// import axios from "axios";
+
+// const apiUrl = "http://localhost:3004/tasks";
+
+// const App = () => {
+//   const tasks = useSelector((state) => state.tasks);
+//   const dispatch = useDispatch();
+//   const [newTask, setNewTask] = useState("");
+//   const [selectedTask, setSelectedTask] = useState(null);
+
+//   useEffect(() => {
+//     axios.get(apiUrl).then((res) => dispatch(fetchTasks(res.data)));
+//   }, [dispatch]);
+
+//   const handleAddTask = () => {
+//     axios.post(apiUrl, { title: newTask }).then((res) => {
+//       dispatch(addTask(res.data));
+//       setNewTask("");
+//     });
+//   };
+
+//   const handleDeleteTask = (id) => {
+//     axios.delete(`${apiUrl}/${id}`).then(() => dispatch(deleteTask(id)));
+//   };
+
+//   const handleSelectedTask = (task) => {
+//     setSelectedTask(task);
+//     setNewTask(task.title);
+//   };
+
+//   const handleUpdateTask = () => {
+//     if (selectedTask) {
+//       dispatch(updateTask(selectedTask.id, { title: newTask }));
+//       setSelectedTask(null);
+//       setNewTask("");
+//     }
+//   };
+
+//   const inputStyle = {
+//     padding: "8px",
+//     marginBottom: "10px",
+//     width: "300px",
+//   };
+
+//   const buttonStyle = {
+//     padding: "8px 16px",
+//     margin: "0 5px",
+//     borderRadius: "5px",
+//     border: "none",
+//     cursor: "pointer",
+//   };
+
+//   return (
+//     <div style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
+//       <h1 style={{ color: "#3498db" }}>Tasks List</h1>
+//       <ul style={{ listStyle: "none", padding: 0 }}>
+//         {tasks.map((task) => (
+//           <li
+//             key={task.id}
+//             style={{
+//               backgroundColor: "#f5f5f5",
+//               padding: "10px",
+//               margin: "10px 0",
+//               borderRadius: "5px",
+//               display: "flex",
+//               justifyContent: "space-between",
+//               alignItems: "center",
+//             }}
+//           >
+//             <span>{task.title}</span>
+//             <div>
+//               <button
+//                 onClick={() => handleDeleteTask(task.id)}
+//                 style={{
+//                   ...buttonStyle,
+//                   backgroundColor: "#e74c3c",
+//                   color: "white",
+//                 }}
+//               >
+//                 Delete
+//               </button>
+//               <button
+//                 onClick={() => handleSelectedTask(task)}
+//                 style={{
+//                   ...buttonStyle,
+//                   backgroundColor: "#3498db",
+//                   color: "white",
+//                 }}
+//               >
+//                 Update
+//               </button>
+//             </div>
+//           </li>
+//         ))}
+//       </ul>
+//       <h1 style={{ color: "#3498db" }}>
+//         {selectedTask ? "Update a task" : "Add a task"}
+//       </h1>
+//       <div style={{ display: "flex", justifyContent: "center" }}>
+//         <input
+//           type="text"
+//           value={newTask}
+//           onChange={(e) => setNewTask(e.target.value)}
+//           placeholder="Task Title"
+//           style={{ ...inputStyle }}
+//         />
+//         <button
+//           onClick={selectedTask ? handleUpdateTask : handleAddTask}
+//           style={{
+//             ...buttonStyle,
+//             backgroundColor: selectedTask ? "#3498db" : "#2ecc71",
+//             color: "white",
+//             marginBottom: "10px",
+//           }}
+//         >
+//           {selectedTask ? "Update" : "Add"}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
 
 //! Redux ex 1
 // import { useState } from "react";
