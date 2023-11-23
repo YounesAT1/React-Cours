@@ -5,7 +5,7 @@ import axios from "axios";
 
 const AddPost = () => {
   const initialPost = { id: 0, content: "", comment: [], likes: 0 };
-  const API_URL = "http://localhost:3004/Posts";
+  const API_URL = "http://localhost:3004/PostsList";
   const [newPost, setNewPost] = useState(initialPost);
   const dispatch = useDispatch();
 

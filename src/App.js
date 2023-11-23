@@ -1,87 +1,133 @@
-//! Social app
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import { AddFriend, AddMessage, AddPost } from "./redux/Social/components";
-import { useSelector, useDispatch } from "react-redux";
-import { AddComment, addLike, fetchPosts } from "./redux/Social/actions";
-import axios from "axios";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AddContact from "./redux/WhatsApp/components/AddContact";
+import ContactList from "./redux/WhatsApp/components/ContactList";
+import Messages from "./redux/WhatsApp/components/Messages";
+import Login from "./redux/WhatsApp/components/LogIn";
+import NavBar from "./redux/WhatsApp/components/NavBar";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const API_URL = "http://localhost:3004/Posts";
-  const posts = useSelector((state) => state.Posts);
-  const dispatch = useDispatch();
-  const [comment, setComment] = useState({});
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const contacts = useSelector((state) => state.contactsAndMessages.contacts);
 
-  useEffect(() => {
-    axios.get(API_URL).then((res) => dispatch(fetchPosts(res.data)));
-  }, [dispatch]);
-
-  const handleAddComment = (postId) => {
-    const commentToAdd = comment[postId];
-
-    dispatch(AddComment(postId, commentToAdd));
-
-    setComment({ ...comment, [postId]: "" });
-  };
-
-  const handleAddLike = (idPost, post) => {
-    dispatch(addLike(idPost, post));
+  const mainContainerStyle = {
+    maxWidth: "800px",
+    margin: "0 auto",
+    padding: "20px",
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#f4f4f4",
+    minHeight: "100vh",
   };
 
   return (
-    <div>
-      <h1>Social App</h1>
-      <Router>
-        <ul>
-          <li>
-            <Link to="/addPost">Add Post</Link>
-          </li>
-          <li>
-            <Link to="/addFriend">Friends 0</Link>
-          </li>
-          <li>
-            <Link to="/addMessage">Messages 0</Link>
-          </li>
-        </ul>
+    <Router>
+      <div style={mainContainerStyle}>
+        {isLoggedIn ? <NavBar /> : <Login />}
         <Routes>
-          <Route path="/addPost" element={<AddPost />}></Route>
-          <Route path="/addFriend" element={<AddFriend />}></Route>
-          <Route path="/addMessage" element={<AddMessage />}></Route>
-        </Routes>
-      </Router>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <p>{post.content}</p>
-          <button onClick={() => handleAddLike(post.id, post)}>
-            Likes {post.likes}
-          </button>
-          <input
-            type="text"
-            value={comment[post.id]}
-            onChange={(e) =>
-              setComment({
-                ...comment,
-                [post.id]: e.target.value,
-              })
-            }
+          <Route path="/addContact" element={<AddContact />} />
+          <Route
+            path="/contactsList"
+            element={<ContactList contacts={contacts} />}
           />
-          <button onClick={() => handleAddComment(post.id)}>
-            Add a Comment
-          </button>
-          <ul>
-            {post.comment &&
-              Array.isArray(post.comment) &&
-              post.comment.map((comment, index) => (
-                <li key={index}>{comment}</li>
-              ))}
-          </ul>
-        </div>
-      ))}
-    </div>
+          <Route
+            path="/messages/:contactId/:contactName"
+            element={<Messages />}
+          />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
 export default App;
+
+//! social app
+
+// import React, { useEffect, useState } from "react";
+// import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+// import { useSelector, useDispatch } from "react-redux";
+// import axios from "axios";
+
+// import { AddComment, addLike, fetchPosts } from "./redux/Social/actions";
+// import { AddFriend, AddMessage, AddPost } from "./redux/Social/components";
+
+// const API_URL = "http://localhost:3004/PostsList";
+
+// const App = () => {
+//   const posts = useSelector((state) => state.Posts);
+//   const dispatch = useDispatch();
+//   const [comment, setComment] = useState({});
+
+//   useEffect(() => {
+//     axios.get(API_URL).then((res) => dispatch(fetchPosts(res.data)));
+//   }, [dispatch]);
+
+//   const handleAddComment = (postId) => {
+//     const commentToAdd = comment[postId];
+//     dispatch(AddComment(postId, commentToAdd));
+//     setComment({ ...comment, [postId]: "" });
+//   };
+
+//   const handleAddLike = (idPost, post) => {
+//     dispatch(addLike(idPost, post));
+//   };
+
+//   const handleCommentInputChange = (postId, value) => {
+//     setComment({
+//       ...comment,
+//       [postId]: value,
+//     });
+//   };
+
+//   return (
+//     <div>
+//       <h1>Social App</h1>
+//       <Router>
+//         <ul>
+//           <li>
+//             <Link to="/addPost">Add Post</Link>
+//           </li>
+//           <li>
+//             <Link to="/addFriend">Friends 0</Link>
+//           </li>
+//           <li>
+//             <Link to="/addMessage">Messages 0</Link>
+//           </li>
+//         </ul>
+//         <Routes>
+//           <Route path="/addPost" element={<AddPost />} />
+//           <Route path="/addFriend" element={<AddFriend />} />
+//           <Route path="/addMessage" element={<AddMessage />} />
+//         </Routes>
+//       </Router>
+//       {posts.map((post) => (
+//         <div key={post.id}>
+//           <p>{post.content}</p>
+//           <button onClick={() => handleAddLike(post.id, post)}>
+//             Likes {post.likes}
+//           </button>
+//           <input
+//             type="text"
+//             value={comment[post.id]}
+//             onChange={(e) => handleCommentInputChange(post.id, e.target.value)}
+//           />
+//           <button onClick={() => handleAddComment(post.id)}>
+//             Add a Comment
+//           </button>
+//           <ul>
+//             {post.commentsList.map((commentText, index) => (
+//               <li key={index}>{commentText}</li>
+//             ))}
+//           </ul>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default App;
 
 //! Redux ex 2
 

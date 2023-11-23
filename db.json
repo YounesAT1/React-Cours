@@ -14,123 +14,6 @@
       "id": "3",
       "title": "Post Number Three",
       "author": "Author three"
-    },
-    {
-      "id": "jg6FrM4"
-    },
-    {
-      "id": 1700564851266,
-      "content": "post number two",
-      "comment": "",
-      "likes": 0
-    },
-    {
-      "id": 1700565859640,
-      "content": "post two",
-      "comment": "",
-      "likes": 0
-    },
-    {
-      "id": 1700566401220,
-      "content": "younes",
-      "comment": "",
-      "likes": 0
-    },
-    {
-      "id": 1700566488669,
-      "content": "jjjjiewjiiweijiwjeiweiieife",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700567264405,
-      "content": "post one",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700567860291,
-      "content": "post two",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700582526975,
-      "content": "Post One",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700582794385,
-      "content": "this is post one",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700583007755,
-      "content": "jjwjfe",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700583021064,
-      "content": "o3ko3jo2",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700583390664,
-      "content": "post wa7ed",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700583397025,
-      "content": "post jouj",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700583647301,
-      "content": "jjojpojo",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700584336198,
-      "content": "mkwk",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700584921207,
-      "content": "post wa7ed",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700585652117,
-      "content": "post one",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700586532939,
-      "content": "mm;m",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700587584453,
-      "content": "mqmlmlq",
-      "comment": [],
-      "likes": 0
-    },
-    {
-      "id": 1700668287043,
-      "content": "lllllll",
-      "comment": [],
-      "likes": 0
     }
   ],
   "comments": [
@@ -145,11 +28,11 @@
       "author": "Author two"
     }
   ],
-  "Posts": [
+  "PostsList": [
     {
-      "id": 1700668287043,
-      "content": "lllllll",
-      "comment": [],
+      "id": 1700729991227,
+      "content": "nknknk",
+      "commentsList": [{ "id": 1, "comment": "some comment" }],
       "likes": 0
     }
   ],
