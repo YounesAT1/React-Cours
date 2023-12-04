@@ -1,7 +1,12 @@
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const ContactList = ({ contacts }) => {
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.user);
+  const userContactList = contacts.filter(
+    (contact) => contact.userId === currentUser.id
+  );
 
   const handleNavigate = () => {
     navigate("/addContact");
@@ -37,6 +42,7 @@ const ContactList = ({ contacts }) => {
     border: "1px solid red",
     borderRadius: "50%",
     padding: "4px",
+    marginLeft: "10px",
   };
 
   const addButtonStyle = {
@@ -57,23 +63,26 @@ const ContactList = ({ contacts }) => {
 
   return (
     <div style={containerStyle}>
-      {contacts.map((contact) => (
+      {userContactList.map((contact) => (
         <Link
           key={contact.id}
           to={`/messages/${contact.id}/${encodeURIComponent(contact.name)}`}
           style={contactStyle}
         >
-          <div>
-            <p>{contact.name}</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <p style={{ marginRight: "80px" }}>{contact.name}</p>
             <div style={lastMessageStyle}>
               {contact.messages.length > 0
                 ? contact.messages[contact.messages.length - 1].text.text
                 : ""}
-              {contact.messages.length > 0 && (
-                <span style={unreadMessagesStyle}>
-                  {contact.messages.length}
-                </span>
-              )}
+
+              <span style={unreadMessagesStyle}>{contact.messages.length}</span>
             </div>
           </div>
         </Link>

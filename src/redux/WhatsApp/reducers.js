@@ -30,7 +30,10 @@ const ContactsAndMessagesReducer = (
               ...contact,
               messages: [
                 ...contact.messages,
-                { id: Date.now(), text: message.text },
+                {
+                  id: Date.now(),
+                  text: message.text,
+                },
               ],
             };
           }

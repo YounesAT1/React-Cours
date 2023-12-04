@@ -5,14 +5,15 @@ import { loginSuccess } from "../actions";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState({ id: 0, userName: "", phoneNumber: "" });
   const navigate = useNavigate();
+
+  const [user, setUser] = useState({ id: 0, userName: "", phoneNumber: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
     dispatch(loginSuccess({ ...user, id: Date.now() }));
     setIsLoggedIn(true);
-    navigate(`/addContact/${user.userName}`);
+    navigate(`/addContact/${user.userName}/${user.id}`);
     setUser({ id: 0, userName: "", phoneNumber: "" });
   };
 
@@ -68,6 +69,7 @@ const Login = () => {
           setUser((prevUser) => ({ ...prevUser, userName: e.target.value }))
         }
         style={inputStyle}
+        autoComplete="off"
       />
       <label htmlFor="phoneNumber" style={labelStyle}>
         Phone Number:
@@ -80,6 +82,7 @@ const Login = () => {
           setUser((prevUser) => ({ ...prevUser, phoneNumber: e.target.value }))
         }
         style={inputStyle}
+        autoComplete="off"
       />
       <button
         onClick={handleLogin}

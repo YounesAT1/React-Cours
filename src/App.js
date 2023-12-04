@@ -1,47 +1,77 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AddContact from "./redux/WhatsApp/components/AddContact";
-import ContactList from "./redux/WhatsApp/components/ContactList";
-import Messages from "./redux/WhatsApp/components/Messages";
-import Login from "./redux/WhatsApp/components/LogIn";
-import NavBar from "./redux/WhatsApp/components/NavBar";
-import { useSelector } from "react-redux";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  AddClient,
+  ClientList,
+  Header,
+  Login,
+  UpdateClient,
+} from "./ExamTwoPrep/components";
 
 const App = () => {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const contacts = useSelector((state) => state.contactsAndMessages.contacts);
-
-  const mainContainerStyle = {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "20px",
-    fontFamily: "Arial, sans-serif",
-    backgroundColor: "#f4f4f4",
-    minHeight: "100vh",
-  };
-
   return (
-    <Router>
-      <div style={mainContainerStyle}>
-        {isLoggedIn ? <NavBar /> : <Login />}
+    <>
+      <Router>
+        <Header />
         <Routes>
-          <Route path="/addContact" element={<AddContact />} />
-          <Route
-            path="/contactsList"
-            element={<ContactList contacts={contacts} />}
-          />
-          <Route
-            path="/messages/:contactId/:contactName"
-            element={<Messages />}
-          />
+          <Route path="/" element={<ClientList />} />
+          <Route path="/addClient" element={<AddClient />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/clients/:clientId" element={<UpdateClient />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </>
   );
 };
 
 export default App;
+
+//! wahtsApp app with redux
+
+// import React from "react";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import AddContact from "./redux/WhatsApp/components/AddContact";
+// import ContactList from "./redux/WhatsApp/components/ContactList";
+// import Messages from "./redux/WhatsApp/components/Messages";
+// import Login from "./redux/WhatsApp/components/LogIn";
+// import NavBar from "./redux/WhatsApp/components/NavBar";
+// import { useSelector } from "react-redux";
+
+// const App = () => {
+//   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+//   const contacts = useSelector((state) => state.contactsAndMessages.contacts);
+
+//   const mainContainerStyle = {
+//     maxWidth: "800px",
+//     margin: "0 auto",
+//     padding: "20px",
+//     fontFamily: "Arial, sans-serif",
+//     backgroundColor: "#f4f4f4",
+//     minHeight: "100vh",
+//   };
+
+//   return (
+//     <Router>
+//       <div style={mainContainerStyle}>
+//         {isLoggedIn ? <NavBar /> : <Login />}
+//         <Routes>
+//           <Route path="/addContact" element={<AddContact />} />
+//           <Route
+//             path="/contactsList"
+//             element={<ContactList contacts={contacts} />}
+//           />
+//           <Route
+//             path="/messages/:contactId/:contactName"
+//             element={<Messages />}
+//           />
+//           <Route path="/login" element={<Login />} />
+//         </Routes>
+//       </div>
+//     </Router>
+//   );
+// };
+
+// export default App;
 
 //! social app
 

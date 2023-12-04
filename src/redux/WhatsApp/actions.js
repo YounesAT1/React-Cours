@@ -11,7 +11,10 @@ export const addContactAction = (contact) => ({
 
 export const addMessageAction = (contactId, messageText) => ({
   type: ADD_MESSAGE,
-  payload: { contactId, message: { id: Date.now(), text: messageText } },
+  payload: {
+    message: { id: Date.now(), text: messageText },
+    contactId,
+  },
 });
 
 export const loginSuccess = (userData) => ({

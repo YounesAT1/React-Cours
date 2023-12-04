@@ -1,19 +1,11 @@
 {
+  "clients": [],
+
   "posts": [
     {
       "id": "1",
       "title": "Post Number One",
       "author": "Author One"
-    },
-    {
-      "id": "2",
-      "title": "Post Number Two",
-      "author": "Author Two"
-    },
-    {
-      "id": "3",
-      "title": "Post Number Three",
-      "author": "Author three"
     }
   ],
   "comments": [
@@ -21,19 +13,6 @@
       "id": "1",
       "title": "Comment Number One",
       "author": "Author One"
-    },
-    {
-      "id": "2",
-      "title": "Comment Number Two",
-      "author": "Author two"
-    }
-  ],
-  "PostsList": [
-    {
-      "id": 1700729991227,
-      "content": "nknknk",
-      "commentsList": [{ "id": 1, "comment": "some comment" }],
-      "likes": 0
     }
   ],
   "profile": {

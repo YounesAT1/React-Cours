@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addContactAction } from "../actions";
 import { useNavigate } from "react-router-dom";
 
 const AddContact = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.user);
 
   const [contact, setContact] = useState({
     id: 0,
     name: "",
     phoneNumber: "",
+    userId: currentUser.id,
     messages: [],
   });
 
