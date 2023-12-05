@@ -4,20 +4,21 @@ import {
   AddClient,
   ClientList,
   Header,
-  Login,
   UpdateClient,
 } from "./ExamTwoPrep/components";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
+
       <Router>
         <Header />
         <Routes>
           <Route path="/" element={<ClientList />} />
-          <Route path="/addClient" element={<AddClient />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/clients/:clientId" element={<UpdateClient />} />
+          <Route path="/clients/add" element={<AddClient />} />
+          <Route path="/clients/update/:clientId" element={<UpdateClient />} />
         </Routes>
       </Router>
     </>
