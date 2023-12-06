@@ -81,10 +81,11 @@ const ClinetList = (props) => {
                   {client.phoneNumber}
                 </td>
                 <td
-                  className={`px-6 py-4 whitespace-nowrap`}
-                  style={{
-                    color: client.delivery === "DONE" ? "green" : "red",
-                  }}
+                  className={`px-6 py-4 whitespace-nowrap ${
+                    client.delivery === "delivered"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
                 >
                   {client.delivery}
                 </td>

@@ -146,16 +146,14 @@ const UpdateClient = () => {
           <select
             id="orderStatus"
             name="delivery"
-            defaultValue="Select Status"
+            value={clientData.delivery}
             onChange={(e) =>
               setClientData({ ...clientData, delivery: e.target.value })
             }
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
             required
           >
-            <option value="" disabled>
-              Select Status
-            </option>
+            <option value="">Select Status</option>
             <option value="delivered">Delivered</option>
             <option value="processing">Processing</option>
           </select>
