@@ -9,6 +9,7 @@ import {
   UPDATE_CLIENT,
 } from "./actionTypes";
 
+//? GLOBAL REQUESTS
 export const makeRequest = () => {
   return {
     type: MAKE_REQUEST,
@@ -22,6 +23,7 @@ export const failRequest = (err) => {
   };
 };
 
+//? FETCH CLIENTS REQUEST
 export const fetchClientsRequest = (clients) => {
   return {
     type: FETCH_CLIENTS_REQUEST,
@@ -29,24 +31,28 @@ export const fetchClientsRequest = (clients) => {
   };
 };
 
+//? DELETE CLIENTE REQUEST
 export const deleteClientRequest = () => {
   return {
     type: DELETE_CLIENT,
   };
 };
 
+//? ADD CLIENT REQUEST
 export const addClientRequest = () => {
   return {
     type: ADD_CLIENT,
   };
 };
 
+//? UPDATE CLIENT REQUEST
 export const updateClientRequest = () => {
   return {
     type: UPDATE_CLIENT,
   };
 };
 
+//? GET SINGLE CLIENT REQUEST
 export const getSingleClientRequest = (client) => {
   return {
     type: GET_SINGLE_CLIENT,
@@ -56,9 +62,9 @@ export const getSingleClientRequest = (client) => {
 
 //? FETCH CLIENTS DATA FROM THE JSON WEB SERVER
 export const fetchClients = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(makeRequest());
-    axios
+    await axios
       .get("http://localhost:3004/clients")
       .then((res) => {
         const clients = res.data;
@@ -72,9 +78,9 @@ export const fetchClients = () => {
 
 //? DELETE A  CLIENT FROM THE JSON WEB SERVER
 export const deleteClient = (ClientIdToDelete) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(makeRequest());
-    axios
+    await axios
       .delete(`http://localhost:3004/clients/${ClientIdToDelete}`)
       .then(() => {
         dispatch(deleteClientRequest());
@@ -87,9 +93,9 @@ export const deleteClient = (ClientIdToDelete) => {
 
 //? ADD  A  CLIENT To THE JSON WEB SERVER
 export const addClient = (client) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(makeRequest());
-    axios
+    await axios
       .post(`http://localhost:3004/clients/`, client)
       .then(() => {
         dispatch(addClientRequest());
@@ -102,9 +108,9 @@ export const addClient = (client) => {
 
 //? UPDATE A CLIENT THE JSON WEB SERVER
 export const updateClient = (client, clientId) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(makeRequest());
-    axios
+    await axios
       .put(`http://localhost:3004/clients/${clientId}`, client)
       .then(() => {
         dispatch(updateClientRequest());
@@ -117,9 +123,9 @@ export const updateClient = (client, clientId) => {
 
 //? GET A SINGLE CLIENT THE JSON WEB SERVER
 export const getSingleClient = (clientId) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(makeRequest());
-    axios
+    await axios
       .get(`http://localhost:3004/clients/${clientId}`)
       .then((res) => {
         const client = res.data;

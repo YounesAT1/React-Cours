@@ -114,8 +114,8 @@ const AddClient = () => {
             required
           >
             <option value="">Select Status</option>
-            <option value="delivered">Delivered</option>
-            <option value="processing">Processing</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Processing">Processing</option>
           </select>
         </div>
 

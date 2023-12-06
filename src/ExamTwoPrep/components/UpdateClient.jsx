@@ -55,7 +55,9 @@ const UpdateClient = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded shadow-md mb-10">
-      <h2 className="text-2xl font-semibold mb-6">Add Client</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-slate-500 text-center">
+        {currentClient.fullName} - {currentClient.id}
+      </h2>
 
       <form autoComplete="off" onSubmit={handleFormSubmt}>
         <div className="mb-4">
@@ -69,9 +71,8 @@ const UpdateClient = () => {
             type="text"
             id="id"
             name="id"
-            value={clientData.id}
-            onChange={() => setClientData({ ...clientData })}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            value={clientData.id || ""}
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 bg-gray-50"
             disabled
           />
         </div>
@@ -87,7 +88,7 @@ const UpdateClient = () => {
             type="text"
             id="fullName"
             name="fullName"
-            value={clientData.fullName}
+            value={clientData.fullName || ""}
             onChange={(e) =>
               setClientData({ ...clientData, fullName: e.target.value })
             }
@@ -107,7 +108,7 @@ const UpdateClient = () => {
             type="email"
             id="email"
             name="email"
-            value={clientData.email}
+            value={clientData.email || ""}
             onChange={(e) =>
               setClientData({ ...clientData, email: e.target.value })
             }
@@ -127,7 +128,7 @@ const UpdateClient = () => {
             type="tel"
             id="phone"
             name="phoneNumber"
-            value={clientData.phoneNumber}
+            value={clientData.phoneNumber || ""}
             onChange={(e) =>
               setClientData({ ...clientData, phoneNumber: e.target.value })
             }
@@ -146,7 +147,7 @@ const UpdateClient = () => {
           <select
             id="orderStatus"
             name="delivery"
-            value={clientData.delivery}
+            value={clientData.delivery || ""}
             onChange={(e) =>
               setClientData({ ...clientData, delivery: e.target.value })
             }
@@ -154,8 +155,8 @@ const UpdateClient = () => {
             required
           >
             <option value="">Select Status</option>
-            <option value="delivered">Delivered</option>
-            <option value="processing">Processing</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Processing">Processing</option>
           </select>
         </div>
 
