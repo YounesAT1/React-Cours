@@ -32,7 +32,6 @@ const ClinetList = (props) => {
   const handleDeleteClient = async (clientIdToDelete) => {
     try {
       await props.deleteClient(clientIdToDelete);
-      toast.success("Client deleted successfully");
       props.loadClients();
       setShowDeleteModal(false);
     } catch (error) {
@@ -72,9 +71,11 @@ const ClinetList = (props) => {
   };
 
   return props.clients.errMessage ? (
-    <h1 className="text-6xl text-red-600 text-center mt-32 font-semibold">
-      {props.clients.errMessage}
-    </h1>
+    <div className="flex items-center justify-center">
+      <h1 className="text-6xl text-red-500 text-center mt-32 font-semibold bg-red-300 p-3 rounded-md w-3/4">
+        {props.clients.errMessage}
+      </h1>
+    </div>
   ) : (
     <div className="mx-6">
       <h1 className="text-2xl font-bold my-5 text-slate-600">Client List :</h1>

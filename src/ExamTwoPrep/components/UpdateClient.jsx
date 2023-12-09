@@ -25,14 +25,24 @@ const UpdateClient = () => {
   const handleFormSubmt = (e) => {
     e.preventDefault();
     const client = { ...clientData };
+    const { fullName, email, phoneNumber, delivery } = clientData;
 
-    try {
-      dispatch(updateClient(client, clientId));
-      toast.success("Client Updated successfully");
-      navigate("/");
-    } catch (error) {
-      dispatch(failRequest(error.message));
-      toast.error("Something went wrong");
+    if (
+      fullName === "" ||
+      email === "" ||
+      phoneNumber === "" ||
+      delivery === ""
+    ) {
+      toast.error("Please fill out all fields");
+      navigate(`/clients/update/${clientId}`);
+    } else {
+      dispatch(updateClient(client, clientId))
+        .then(() => {
+          navigate("/");
+        })
+        .catch((error) => {
+          dispatch(failRequest(error.message));
+        });
     }
   };
 
@@ -55,9 +65,11 @@ const UpdateClient = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded shadow-md mb-10">
-      <h2 className="text-2xl font-semibold mb-6 text-slate-500 text-center">
-        {currentClient.fullName} - {currentClient.id}
-      </h2>
+      {currentClient && (
+        <h2 className="text-2xl font-semibold mb-6 text-slate-500 text-center">
+          {currentClient.fullName} - {currentClient.id}
+        </h2>
+      )}
 
       <form autoComplete="off" onSubmit={handleFormSubmt}>
         <div className="mb-4">
@@ -94,7 +106,6 @@ const UpdateClient = () => {
             }
             placeholder="Enter Full Name"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           />
         </div>
         <div className="mb-4">
@@ -114,7 +125,6 @@ const UpdateClient = () => {
             }
             placeholder="Enter Email Address"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           />
         </div>
         <div className="mb-4">
@@ -134,7 +144,6 @@ const UpdateClient = () => {
             }
             placeholder="Enter Phone Number"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           />
         </div>
         <div className="mb-4">
@@ -152,7 +161,6 @@ const UpdateClient = () => {
               setClientData({ ...clientData, delivery: e.target.value })
             }
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           >
             <option value="">Select Status</option>
             <option value="Delivered">Delivered</option>

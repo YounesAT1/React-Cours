@@ -20,14 +20,23 @@ const AddClient = () => {
   const handleFormSubmt = (e) => {
     e.preventDefault();
     const client = { ...clientData, id: Date.now() };
+    const { fullName, email, phoneNumber, delivery } = clientData;
 
-    try {
-      dispatch(addClient(client));
-      toast.success("Client added successfully");
-      navigate("/");
-    } catch (error) {
-      dispatch(failRequest(error.message));
-      toast.error("Something went wrong");
+    if (
+      fullName === "" ||
+      email === "" ||
+      phoneNumber === "" ||
+      delivery === ""
+    ) {
+      toast.error("Please fill out all fields");
+      navigate("/clients/add");
+    } else {
+      try {
+        dispatch(addClient(client));
+        navigate("/");
+      } catch (error) {
+        dispatch(failRequest(error.message));
+      }
     }
   };
 
@@ -53,7 +62,6 @@ const AddClient = () => {
             }
             placeholder="Enter Full Name"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           />
         </div>
         <div className="mb-4">
@@ -73,7 +81,6 @@ const AddClient = () => {
             }
             placeholder="Enter Email Address"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           />
         </div>
         <div className="mb-4">
@@ -93,7 +100,6 @@ const AddClient = () => {
             }
             placeholder="Enter Phone Number"
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           />
         </div>
         <div className="mb-4">
@@ -111,7 +117,6 @@ const AddClient = () => {
               setClientData({ ...clientData, delivery: e.target.value })
             }
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-            required
           >
             <option value="">Select Status</option>
             <option value="Delivered">Delivered</option>

@@ -8,6 +8,7 @@ import {
   MAKE_REQUEST,
   UPDATE_CLIENT,
 } from "./actionTypes";
+import toast from "react-hot-toast";
 
 //? GLOBAL REQUESTS
 export const makeRequest = () => {
@@ -61,78 +62,65 @@ export const getSingleClientRequest = (client) => {
 };
 
 //? FETCH CLIENTS DATA FROM THE JSON WEB SERVER
-export const fetchClients = () => {
-  return async (dispatch) => {
+
+export const fetchClients = () => async (dispatch) => {
+  try {
     dispatch(makeRequest());
-    await axios
-      .get("http://localhost:3004/clients")
-      .then((res) => {
-        const clients = res.data;
-        dispatch(fetchClientsRequest(clients));
-      })
-      .catch((err) => {
-        dispatch(failRequest(err.message));
-      });
-  };
+    const res = await axios.get("http://localhost:3004/clients");
+    dispatch(fetchClientsRequest(res.data));
+  } catch (err) {
+    dispatch(failRequest(err.message));
+  }
 };
 
 //? DELETE A  CLIENT FROM THE JSON WEB SERVER
-export const deleteClient = (ClientIdToDelete) => {
-  return async (dispatch) => {
-    dispatch(makeRequest());
-    await axios
-      .delete(`http://localhost:3004/clients/${ClientIdToDelete}`)
-      .then(() => {
-        dispatch(deleteClientRequest());
-      })
-      .catch((err) => {
-        dispatch(failRequest(err.message));
-      });
-  };
+export const deleteClient = (ClientIdToDelete) => async (dispatch) => {
+  try {
+    dispatch(makeRequest);
+    await axios.delete(`http://localhost:3004/clients/${ClientIdToDelete}`);
+    dispatch(deleteClientRequest());
+    toast.success("Client deleted successfully");
+  } catch (err) {
+    dispatch(failRequest(err.message));
+    toast.error(err.message);
+  }
 };
 
 //? ADD  A  CLIENT To THE JSON WEB SERVER
-export const addClient = (client) => {
-  return async (dispatch) => {
+
+export const addClient = (client) => async (dispatch) => {
+  try {
     dispatch(makeRequest());
-    await axios
-      .post(`http://localhost:3004/clients/`, client)
-      .then(() => {
-        dispatch(addClientRequest());
-      })
-      .catch((err) => {
-        dispatch(failRequest(err.message));
-      });
-  };
+    await axios.post(`http://localhost:3004/clients/`, client);
+    dispatch(addClientRequest());
+    toast.success("Client added successfully");
+  } catch (err) {
+    dispatch(failRequest(err.message));
+    toast.error("Something went wrong");
+  }
 };
 
 //? UPDATE A CLIENT THE JSON WEB SERVER
-export const updateClient = (client, clientId) => {
-  return async (dispatch) => {
+export const updateClient = (client, clientId) => async (dispatch) => {
+  try {
     dispatch(makeRequest());
-    await axios
-      .put(`http://localhost:3004/clients/${clientId}`, client)
-      .then(() => {
-        dispatch(updateClientRequest());
-      })
-      .catch((err) => {
-        dispatch(failRequest(err.message));
-      });
-  };
+    await axios.put(`http://localhost:3004/clients/${clientId}`, client);
+    dispatch(updateClientRequest());
+    toast.success("Client updated successfully");
+  } catch (err) {
+    dispatch(failRequest(err.message));
+    toast.error("Something went wrong");
+  }
 };
 
 //? GET A SINGLE CLIENT THE JSON WEB SERVER
-export const getSingleClient = (clientId) => {
-  return async (dispatch) => {
+
+export const getSingleClient = (clientId) => async (dispatch) => {
+  try {
     dispatch(makeRequest());
-    await axios
-      .get(`http://localhost:3004/clients/${clientId}`)
-      .then((res) => {
-        const client = res.data;
-        dispatch(getSingleClientRequest(client));
-      })
-      .catch((err) => {
-        dispatch(failRequest(err.message));
-      });
-  };
+    const res = await axios.get(`http://localhost:3004/clients/${clientId}`);
+    dispatch(getSingleClientRequest(res.data));
+  } catch (err) {
+    dispatch(failRequest(err.message));
+  }
 };

@@ -1,3 +1,11 @@
 {
-  "clients": []
+  "clients": [
+    {
+      "fullName": "wrt",
+      "email": "erty@gmail.com",
+      "delivery": "Processing",
+      "phoneNumber": "1234567",
+      "id": 1702134430406
+    }
+  ]
 }
