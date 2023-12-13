@@ -1,31 +1,110 @@
-import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import {
-  AddClient,
-  ClientList,
-  Header,
-  UpdateClient,
-} from "./ExamTwoPrep/components";
-import { Toaster } from "react-hot-toast";
+//! EXAM 2 REACT
+
+import { useSelector } from "react-redux";
+import ListRopas from "./V2_AIT-TALB_YOUNES/components/ListRopas";
+import RopaAvecIngredientChercher from "./V2_AIT-TALB_YOUNES/components/RopaAvecIngredientChercher";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import DetailRopas from "./V2_AIT-TALB_YOUNES/components/DetailRopas";
+import AjouterRopa from "./V2_AIT-TALB_YOUNES/components/AjouterRopa";
+import AjouterCommentaire from "./V2_AIT-TALB_YOUNES/components/AjouterCommentaire";
+import ListPromotion from "./V2_AIT-TALB_YOUNES/components/ListPromotion";
+import FilterAvecCuisine from "./V2_AIT-TALB_YOUNES/components/FilterAvecCuisine";
+import ChercherAvecNom from "./V2_AIT-TALB_YOUNES/components/ChercherAvecNom";
 
 const App = () => {
-  return (
-    <>
-      <Toaster position="top-center" reverseOrder={false} />
+  const Ropas = useSelector((state) => state.listeRepas);
+  const filteredListeRepas = useSelector((state) => state.filteredListeRepas);
+  const filteredListeRepasAvecCuisine = useSelector(
+    (state) => state.filteredListeRepasAvecCuisine
+  );
+  const filteredListeRepasAvecNom = useSelector(
+    (state) => state.filteredListeRepasAvecNom
+  );
 
-      <Router>
-        <Header />
+  return (
+    <div>
+      <BrowserRouter>
+        <Link to="/ropa/ajouter">
+          <h1>Ajouter Ropa</h1>
+        </Link>
+        <Link to="/ropas">
+          <h1>List de ropas</h1>
+        </Link>
+        <Link to="/chercherAverIngredient">
+          <h1>chercher ropa avec ingredient</h1>
+        </Link>
+        <Link to="/filterRopaParTypeCuisine">
+          <h1>filter ropa avec type cuisine </h1>
+        </Link>
+        <Link to="/chercherAvecNom">
+          <h1>chercher ropa avec nom </h1>
+        </Link>
+
         <Routes>
-          <Route path="/" element={<ClientList />} />
-          <Route path="/clients/add" element={<AddClient />} />
-          <Route path="/clients/update/:clientId" element={<UpdateClient />} />
+          <Route path="/ropas" element={<ListRopas Ropas={Ropas} />} />
+          <Route
+            path="/chercherAverIngredient"
+            element={
+              <RopaAvecIngredientChercher
+                filteredListeRepas={filteredListeRepas}
+              />
+            }
+          />
+          <Route
+            path="/filterRopaParTypeCuisine"
+            element={
+              <FilterAvecCuisine filters={filteredListeRepasAvecCuisine} />
+            }
+          />
+          <Route
+            path="/chercherAvecNom"
+            element={<ChercherAvecNom results={filteredListeRepasAvecNom} />}
+          />
+          <Route path="/:id/details" element={<DetailRopas Ropas={Ropas} />} />
+          <Route
+            path="/ropas/:ropaId/ajouterCommentaire"
+            element={<AjouterCommentaire />}
+          />
+          <Route
+            path="/ropas/:ropaId/listPromotion"
+            element={<ListPromotion />}
+          />
+          <Route path="/ropa/ajouter" element={<AjouterRopa />} />
         </Routes>
-      </Router>
-    </>
+      </BrowserRouter>
+    </div>
   );
 };
 
 export default App;
+// import React from "react";
+// import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+// import {
+//   AddClient,
+//   ClientList,
+//   Header,
+//   UpdateClient,
+// } from "./ExamTwoPrep/components";
+// import { Toaster } from "react-hot-toast";
+
+// const App = () => {
+//   return (
+//     <>
+//       <Toaster position="top-center" reverseOrder={false} />
+
+//       <Router>
+//         <Header />
+//         <Routes>
+//           <Route path="/" element={<ClientList />} />
+//           <Route path="/clients/add" element={<AddClient />} />
+//           <Route path="/clients/update/:clientId" element={<UpdateClient />} />
+//         </Routes>
+//       </Router>
+//     </>
+//   );
+// };
+
+// export default App;
 
 //! wahtsApp app with redux
 
