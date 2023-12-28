@@ -10,7 +10,7 @@ const ListPromotion = () => {
     return <div className="text-red-500">Ropa not found!</div>;
   }
 
-  const listDePromotion = selectedRopa.promotions || [];
+  const listDePromotion = selectedRopa.promotions;
 
   return (
     <div className="p-4">

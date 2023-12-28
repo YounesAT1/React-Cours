@@ -15,20 +15,8 @@ const AjouterRopa = () => {
       tempsPreparation: 0,
       typeCuisine: "",
     },
-    commentaires: [
-      {
-        auteur: "",
-        texte: "",
-        note: 0,
-      },
-    ],
-    promotions: [
-      {
-        libelle: "",
-        description: "",
-        value: 0,
-      },
-    ],
+    commentaires: [],
+    promotions: [],
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -110,76 +98,6 @@ const AjouterRopa = () => {
             });
           }}
         />
-        Commentaires
-        {formData.commentaires.map((commentaire, index) => (
-          <div key={index}>
-            Auteur:
-            <input
-              type="text"
-              value={formData.commentaires[index].auteur}
-              onChange={(e) => {
-                const updatedCommentaires = [...formData.commentaires];
-                updatedCommentaires[index].auteur = e.target.value;
-                setFormData({ ...formData, commentaires: updatedCommentaires });
-              }}
-            />
-            Texte:
-            <input
-              type="text"
-              value={formData.commentaires[index].texte}
-              onChange={(e) => {
-                const updatedCommentaires = [...formData.commentaires];
-                updatedCommentaires[index].texte = e.target.value;
-                setFormData({ ...formData, commentaires: updatedCommentaires });
-              }}
-            />
-            Note:
-            <input
-              type="number"
-              value={formData.commentaires[index].note}
-              onChange={(e) => {
-                const updatedCommentaires = [...formData.commentaires];
-                updatedCommentaires[index].note = e.target.value;
-                setFormData({ ...formData, commentaires: updatedCommentaires });
-              }}
-            />
-          </div>
-        ))}
-        Promotions
-        {formData.promotions.map((promotion, index) => (
-          <div key={index}>
-            Libellé:
-            <input
-              type="text"
-              value={formData.promotions[index].libelle}
-              onChange={(e) => {
-                const updatedPromotions = [...formData.promotions];
-                updatedPromotions[index].libelle = e.target.value;
-                setFormData({ ...formData, promotions: updatedPromotions });
-              }}
-            />
-            Description:
-            <input
-              type="text"
-              value={formData.promotions[index].description}
-              onChange={(e) => {
-                const updatedPromotions = [...formData.promotions];
-                updatedPromotions[index].description = e.target.value;
-                setFormData({ ...formData, promotions: updatedPromotions });
-              }}
-            />
-            Value:
-            <input
-              type="number"
-              value={formData.promotions[index].value}
-              onChange={(e) => {
-                const updatedPromotions = [...formData.promotions];
-                updatedPromotions[index].value = e.target.value;
-                setFormData({ ...formData, promotions: updatedPromotions });
-              }}
-            />
-          </div>
-        ))}
         <button type="submit" className="bg-blue-400 p-4 text-white">
           Add
         </button>

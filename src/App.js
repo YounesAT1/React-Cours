@@ -1,82 +1,137 @@
-//! EXAM 2 REACT
-
-import { useSelector } from "react-redux";
-import ListRopas from "./V2_AIT-TALB_YOUNES/components/ListRopas";
-import RopaAvecIngredientChercher from "./V2_AIT-TALB_YOUNES/components/RopaAvecIngredientChercher";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import DetailRopas from "./V2_AIT-TALB_YOUNES/components/DetailRopas";
-import AjouterRopa from "./V2_AIT-TALB_YOUNES/components/AjouterRopa";
-import AjouterCommentaire from "./V2_AIT-TALB_YOUNES/components/AjouterCommentaire";
-import ListPromotion from "./V2_AIT-TALB_YOUNES/components/ListPromotion";
-import FilterAvecCuisine from "./V2_AIT-TALB_YOUNES/components/FilterAvecCuisine";
-import ChercherAvecNom from "./V2_AIT-TALB_YOUNES/components/ChercherAvecNom";
-
-const App = () => {
-  const Ropas = useSelector((state) => state.listeRepas);
-  const filteredListeRepas = useSelector((state) => state.filteredListeRepas);
-  const filteredListeRepasAvecCuisine = useSelector(
-    (state) => state.filteredListeRepasAvecCuisine
-  );
-  const filteredListeRepasAvecNom = useSelector(
-    (state) => state.filteredListeRepasAvecNom
-  );
-
-  return (
-    <div>
-      <BrowserRouter>
-        <Link to="/ropa/ajouter">
-          <h1>Ajouter Ropa</h1>
-        </Link>
-        <Link to="/ropas">
-          <h1>List de ropas</h1>
-        </Link>
-        <Link to="/chercherAverIngredient">
-          <h1>chercher ropa avec ingredient</h1>
-        </Link>
-        <Link to="/filterRopaParTypeCuisine">
-          <h1>filter ropa avec type cuisine </h1>
-        </Link>
-        <Link to="/chercherAvecNom">
-          <h1>chercher ropa avec nom </h1>
-        </Link>
-
-        <Routes>
-          <Route path="/ropas" element={<ListRopas Ropas={Ropas} />} />
-          <Route
-            path="/chercherAverIngredient"
-            element={
-              <RopaAvecIngredientChercher
-                filteredListeRepas={filteredListeRepas}
-              />
-            }
-          />
-          <Route
-            path="/filterRopaParTypeCuisine"
-            element={
-              <FilterAvecCuisine filters={filteredListeRepasAvecCuisine} />
-            }
-          />
-          <Route
-            path="/chercherAvecNom"
-            element={<ChercherAvecNom results={filteredListeRepasAvecNom} />}
-          />
-          <Route path="/:id/details" element={<DetailRopas Ropas={Ropas} />} />
-          <Route
-            path="/ropas/:ropaId/ajouterCommentaire"
-            element={<AjouterCommentaire />}
-          />
-          <Route
-            path="/ropas/:ropaId/listPromotion"
-            element={<ListPromotion />}
-          />
-          <Route path="/ropa/ajouter" element={<AjouterRopa />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-};
+import React from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Nav from "./V1_AIT-TALB_YOUNES/components/Nav";
+import AjouterIng from "./V1_AIT-TALB_YOUNES/components/AjouterIng";
+import ListRecette from "./V1_AIT-TALB_YOUNES/components/ListRecette";
+import AficherIng from "./V1_AIT-TALB_YOUNES/components/AficherIng";
+import SupprimerIng from "./V1_AIT-TALB_YOUNES/components/SupprimerIng";
+import AjouterRecette from "./V1_AIT-TALB_YOUNES/components/AjouterRecette";
+import SupprimerRecette from "./V1_AIT-TALB_YOUNES/components/SupprimerRecette";
+import ModifierIng from "./V1_AIT-TALB_YOUNES/components/ModifierIng";
+import ModifierRecette from "./V1_AIT-TALB_YOUNES/components/ModifierRecette";
+const App = () => (
+  <div>
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path="/AjouterIngredient/:idRecette" element={<AjouterIng />} />
+        <Route
+          path="/recette/:idRecette/listIngredient"
+          element={<AficherIng />}
+        />
+        <Route
+          path="/recette/:idRecette/listIngredient/supprimer"
+          element={<SupprimerIng />}
+        />
+        <Route
+          path="/recette/:idRecette/ingredients/:ingNom/modifer"
+          element={<ModifierIng />}
+        />
+        <Route path="/recette/supprimer" element={<SupprimerRecette />} />
+        <Route path="/" element={<ListRecette />} />
+        <Route path="/recette/ajouter" element={<AjouterRecette />} />
+        <Route
+          path="/recette/:idRecette/modifier"
+          element={<ModifierRecette />}
+        />
+      </Routes>
+    </Router>
+  </div>
+);
 
 export default App;
+
+// import Exam from "./Exam/Exam";
+
+// const App = () => {
+//   return (
+//     <>
+//       <Exam />
+//     </>
+//   );
+// };
+
+// export default App;
+
+// //! EXAM 2 REACT
+
+// import { useSelector } from "react-redux";
+// import ListRopas from "./V2_AIT-TALB_YOUNES/components/ListRopas";
+// import RopaAvecIngredientChercher from "./V2_AIT-TALB_YOUNES/components/RopaAvecIngredientChercher";
+// import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+// import DetailRopas from "./V2_AIT-TALB_YOUNES/components/DetailRopas";
+// import AjouterRopa from "./V2_AIT-TALB_YOUNES/components/AjouterRopa";
+// import AjouterCommentaire from "./V2_AIT-TALB_YOUNES/components/AjouterCommentaire";
+// import ListPromotion from "./V2_AIT-TALB_YOUNES/components/ListPromotion";
+// import FilterAvecCuisine from "./V2_AIT-TALB_YOUNES/components/FilterAvecCuisine";
+// import ChercherAvecNom from "./V2_AIT-TALB_YOUNES/components/ChercherAvecNom";
+
+// const App = () => {
+//   const Ropas = useSelector((state) => state.listeRepas);
+//   const filteredListeRepas = useSelector((state) => state.filteredListeRepas);
+//   const filteredListeRepasAvecCuisine = useSelector(
+//     (state) => state.filteredListeRepasAvecCuisine
+//   );
+//   const filteredListeRepasAvecNom = useSelector(
+//     (state) => state.filteredListeRepasAvecNom
+//   );
+
+//   return (
+//     <div>
+//       <BrowserRouter>
+//         <Link to="/ropa/ajouter">
+//           <h1>Ajouter Ropa</h1>
+//         </Link>
+//         <Link to="/ropas">
+//           <h1>List de ropas</h1>
+//         </Link>
+//         <Link to="/chercherAverIngredient">
+//           <h1>chercher ropa avec ingredient</h1>
+//         </Link>
+//         <Link to="/filterRopaParTypeCuisine">
+//           <h1>filter ropa avec type cuisine </h1>
+//         </Link>
+//         <Link to="/chercherAvecNom">
+//           <h1>chercher ropa avec nom </h1>
+//         </Link>
+
+//         <Routes>
+//           <Route path="/ropas" element={<ListRopas Ropas={Ropas} />} />
+//           <Route
+//             path="/chercherAverIngredient"
+//             element={
+//               <RopaAvecIngredientChercher
+//                 filteredListeRepas={filteredListeRepas}
+//               />
+//             }
+//           />
+//           <Route
+//             path="/filterRopaParTypeCuisine"
+//             element={
+//               <FilterAvecCuisine filters={filteredListeRepasAvecCuisine} />
+//             }
+//           />
+//           <Route
+//             path="/chercherAvecNom"
+//             element={<ChercherAvecNom results={filteredListeRepasAvecNom} />}
+//           />
+//           <Route path="/:id/details" element={<DetailRopas Ropas={Ropas} />} />
+//           <Route
+//             path="/ropas/:ropaId/ajouterCommentaire"
+//             element={<AjouterCommentaire />}
+//           />
+//           <Route
+//             path="/ropas/:ropaId/listPromotion"
+//             element={<ListPromotion />}
+//           />
+//           <Route path="/ropa/ajouter" element={<AjouterRopa />} />
+//         </Routes>
+//       </BrowserRouter>
+//     </div>
+//   );
+// };
+
+// export default App;
 // import React from "react";
 // import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 // import {
