@@ -1,45 +1,72 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Nav from "./V1_AIT-TALB_YOUNES/components/Nav";
-import AjouterIng from "./V1_AIT-TALB_YOUNES/components/AjouterIng";
-import ListRecette from "./V1_AIT-TALB_YOUNES/components/ListRecette";
-import AficherIng from "./V1_AIT-TALB_YOUNES/components/AficherIng";
-import SupprimerIng from "./V1_AIT-TALB_YOUNES/components/SupprimerIng";
-import AjouterRecette from "./V1_AIT-TALB_YOUNES/components/AjouterRecette";
-import SupprimerRecette from "./V1_AIT-TALB_YOUNES/components/SupprimerRecette";
-import ModifierIng from "./V1_AIT-TALB_YOUNES/components/ModifierIng";
-import ModifierRecette from "./V1_AIT-TALB_YOUNES/components/ModifierRecette";
-const App = () => (
-  <div>
-    <Router>
-      <Nav />
-      <Routes>
-        <Route path="/AjouterIngredient/:idRecette" element={<AjouterIng />} />
-        <Route
-          path="/recette/:idRecette/listIngredient"
-          element={<AficherIng />}
-        />
-        <Route
-          path="/recette/:idRecette/listIngredient/supprimer"
-          element={<SupprimerIng />}
-        />
-        <Route
-          path="/recette/:idRecette/ingredients/:ingNom/modifer"
-          element={<ModifierIng />}
-        />
-        <Route path="/recette/supprimer" element={<SupprimerRecette />} />
-        <Route path="/" element={<ListRecette />} />
-        <Route path="/recette/ajouter" element={<AjouterRecette />} />
-        <Route
-          path="/recette/:idRecette/modifier"
-          element={<ModifierRecette />}
-        />
-      </Routes>
-    </Router>
-  </div>
-);
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  AjouterPay,
+  AnneIndep,
+  ListPays,
+  ListPaysIndep,
+  Menu,
+} from "./EfmPrep/components";
+const App = () => {
+  return (
+    <main>
+      <Router>
+        <Menu />
+        <Routes>
+          <Route path="pays/afficher" element={<ListPays />} />
+          <Route path="pays/ajouter" element={<AjouterPay />} />
+          <Route path="/anneeIndep/:anneeIndep" element={<ListPaysIndep />} />
+          <Route path="/anneeIndep" element={<AnneIndep />} />
+        </Routes>
+      </Router>
+    </main>
+  );
+};
 
 export default App;
+
+// import React from "react";
+// import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+// import Nav from "./V1_AIT-TALB_YOUNES/components/Nav";
+// import AjouterIng from "./V1_AIT-TALB_YOUNES/components/AjouterIng";
+// import ListRecette from "./V1_AIT-TALB_YOUNES/components/ListRecette";
+// import AficherIng from "./V1_AIT-TALB_YOUNES/components/AficherIng";
+// import SupprimerIng from "./V1_AIT-TALB_YOUNES/components/SupprimerIng";
+// import AjouterRecette from "./V1_AIT-TALB_YOUNES/components/AjouterRecette";
+// import SupprimerRecette from "./V1_AIT-TALB_YOUNES/components/SupprimerRecette";
+// import ModifierIng from "./V1_AIT-TALB_YOUNES/components/ModifierIng";
+// import ModifierRecette from "./V1_AIT-TALB_YOUNES/components/ModifierRecette";
+// const App = () => (
+//   <div>
+//     <Router>
+//       <Nav />
+//       <Routes>
+//         <Route path="/AjouterIngredient/:idRecette" element={<AjouterIng />} />
+//         <Route
+//           path="/recette/:idRecette/listIngredient"
+//           element={<AficherIng />}
+//         />
+//         <Route
+//           path="/recette/:idRecette/listIngredient/supprimer"
+//           element={<SupprimerIng />}
+//         />
+//         <Route
+//           path="/recette/:idRecette/ingredients/:ingNom/modifer"
+//           element={<ModifierIng />}
+//         />
+//         <Route path="/recette/supprimer" element={<SupprimerRecette />} />
+//         <Route path="/" element={<ListRecette />} />
+//         <Route path="/recette/ajouter" element={<AjouterRecette />} />
+//         <Route
+//           path="/recette/:idRecette/modifier"
+//           element={<ModifierRecette />}
+//         />
+//       </Routes>
+//     </Router>
+//   </div>
+// );
+
+// export default App;
 
 // import Exam from "./Exam/Exam";
 
